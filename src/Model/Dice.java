@@ -1,17 +1,20 @@
 package Model;
 
 public class Dice {
-    int faceValue;
+    int diceOutcome;
 
 
     public int getFaceValue() {
-        return faceValue;
+        return diceOutcome;
     }
 
     public void rollDice() {
         int maxEye = 6;
         int minEye = 1;
-        this.faceValue = (int) ((Math.random() * maxEye) + minEye);
+        this.diceOutcome = (int) ((Math.random() * maxEye) + minEye);
     }
 
+    public void setDiceOutcome(int diceOutcome) {
+        this.diceOutcome = diceOutcome;
+    }
 }
