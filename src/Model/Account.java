@@ -1,12 +1,13 @@
 package Model;
+import Model.Player;
 
 public class Account {
 
         private int totalBalance;
         private int balanceToBankruptcy;
 
-        public Account(){
-            this.totalBalance = 1000;
+        public Account(int balance){
+            this.totalBalance = balance;
             this.balanceToBankruptcy = 0;
         }
 

@@ -7,13 +7,33 @@ public class Player {
     Account playerAccount;
     Property playerProperty;
     int playerPosition;
+    int playerType;
+    int totalPlayers;
 
-    public void setupAccount() {
-
+    public int setTotalPlayers(int a){
+        totalPlayers = a;
     }
 
-    public Player(int playerType, String playerName) {
+    public int getTotalPlayers() {
+        return totalPlayers;
+    }
+
+    public void setupAccount() {
+        int startingBalance = 0;
+        if (totalPlayers == 2) {
+            startingBalance = 20;
+        } else if (totalPlayers == 3) {
+            startingBalance = 18
+        } else if (totalPlayers == 4) {
+            startingBalance = 16;
+        }
+
+        Account account = new Account(startingBalance);
+    }
+
+    public Player(int playerType) {
         this.playerPosition = 0;
+        this.playerType = playerType;
     }
 
     public Piece getPlayerPiece() {
@@ -21,10 +41,6 @@ public class Player {
     }
 
     public void setupProperty() {
-
-    }
-
-    public void changetotalBalance(int changeMoney) {
 
     }
 
