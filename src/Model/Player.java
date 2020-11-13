@@ -2,7 +2,7 @@ package Model;
 
 public class Player {
     String playername;
-    //int playerAge;
+    int playerAge;
     Piece playerPiece;
     Account playerAccount;
     Property playerProperty;
@@ -23,7 +23,7 @@ public class Player {
         if (totalPlayers == 2) {
             startingBalance = 20;
         } else if (totalPlayers == 3) {
-            startingBalance = 18
+            startingBalance = 18;
         } else if (totalPlayers == 4) {
             startingBalance = 16;
         }
@@ -31,9 +31,18 @@ public class Player {
         Account account = new Account(startingBalance);
     }
 
-    public Player(int playerType) {
+    public Player(int type, int age) {
         this.playerPosition = 0;
-        this.playerType = playerType;
+        this.playerType = type;
+        this.playerAge = age;
+    }
+
+    public void setPlayerAge(int playerAge) {
+        this.playerAge = playerAge;
+    }
+
+    public int getPlayerAge() {
+        return playerAge;
     }
 
     public Piece getPlayerPiece() {

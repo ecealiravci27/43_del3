@@ -1,14 +1,22 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Piece {
-    String pieceType;
+    int pieceType;
     int totalMoves;
+    int[] type = new int[]{1, 2, 3, 4};
 
-    private void changeBoardPosition(int diceOutcome) {
 
+    private void movePiece(int addMove) {
+        this.totalMoves = addMove;
     }
 
-    public void getBoardPosition() {
+    private void setPieceType(int a) {
+        this.pieceType = type[a];
+    }
 
+    private int getPieceMoves() {
+        return totalMoves;
     }
 }

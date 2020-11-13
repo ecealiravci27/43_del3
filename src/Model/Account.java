@@ -27,4 +27,7 @@ public class Account {
             return totalBalance;
         }
 
+        public int winCondition(){
+
+        }
 }
