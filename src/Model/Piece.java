@@ -3,9 +3,9 @@ package Model;
 import java.util.ArrayList;
 
 public class Piece {
-    int pieceType;
+    String pieceType;
     int totalMoves;
-    int[] type = new int[]{1, 2, 3, 4};
+    String[] type = new String[]{"Cat", "Dog", "Boat", "Car"};
 
 
     private void movePiece(int addMove) {
