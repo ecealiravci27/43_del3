@@ -2,7 +2,6 @@ package Model;
 
 public class Player {
     String playername;
-    int playerAge;
     Piece playerPiece;
     Account playerAccount;
     Property playerProperty;
@@ -10,7 +9,7 @@ public class Player {
     int playerType;
     int totalPlayers;
 
-    public int setTotalPlayers(int a){
+    public void setTotalPlayers(int a){
         totalPlayers = a;
     }
 
@@ -31,19 +30,11 @@ public class Player {
         Account account = new Account(startingBalance);
     }
 
-    public Player(int type, int age) {
+    public Player(int type) {
         this.playerPosition = 0;
         this.playerType = type;
-        this.playerAge = age;
     }
 
-    public void setPlayerAge(int playerAge) {
-        this.playerAge = playerAge;
-    }
-
-    public int getPlayerAge() {
-        return playerAge;
-    }
 
     public Piece getPlayerPiece() {
         return playerPiece;

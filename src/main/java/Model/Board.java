@@ -4,13 +4,14 @@ public class Board {
    Field[] field;
    int totalField = 24;
 
-   public int getFieldIndex(int id) {
+   public Field getFieldIndex(int id) {
       return field[id];
    }
 
 
-   public int getField() {
+   public Field getField() {
 
+      return null;
    }
 
    public void setupField(int totalField) {

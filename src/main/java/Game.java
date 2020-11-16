@@ -1,16 +1,35 @@
+import Model.Dice;
+import Model.Player;
+
 import java.util.Scanner;
+/*
 public class Game {
     public static void main(String[] args) {
         //Initiating variables and creating objects for 2 players
         Scanner in = new Scanner(System.in);
         Dice dice = new Dice();
+        int totalPlayers;
+        int boardSize = 24;
         Player player = new Player(1, 2);
         int i = 1;
 
         //getting player information
-        System.out.println("Are you player 1 or player 2?");
-
+        System.out.println("How many players?");
+        totalPlayers = in.nextInt();
         // Checks if the value is an int
+
+        Player[]  plauers = new Player[totalPlayers] ;
+
+        for (int j = 0; j < totalPlayers ; j++) {
+            if (j == 0){
+                System.out.println("The youngest starts. please choose your piece");
+            }
+            System.out.println("what is your age player " + ""+j);
+            int playerage =
+            plauers[j] = new Player();
+
+        }
+
         while (!in.hasNextInt()) {
             System.out.println("Please write 1 or 2");
             in.nextLine();
@@ -106,4 +125,7 @@ public class Game {
         String lastName = in.nextLine();
         last.setPlayerName(lastName);
     }
+
 }
+
+ */
