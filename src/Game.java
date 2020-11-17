@@ -3,6 +3,7 @@ public class Game {
     public static void main(String[] args) {
         //Initiating variables and creating objects for 2 players
         Scanner in = new Scanner(System.in);
+        int totalplayers;
         Dice dice = new Dice();
         Player player = new Player(1, 2);
         int i = 1;
