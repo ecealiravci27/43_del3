@@ -1,5 +1,4 @@
 package Model;
-import Model.Player;
 
 public class Account {
 
@@ -11,7 +10,7 @@ public class Account {
             this.balanceToBankruptcy = 0;
         }
 
-        public void setStartingBalace(int playerAmount){
+        public void setStartingBalance(int playerAmount){
 
         }
 
@@ -27,7 +26,7 @@ public class Account {
             return totalBalance;
         }
 
-        public int winCondition(){
+        public void winCondition(){
 
         }
 }
