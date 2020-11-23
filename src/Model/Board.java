@@ -2,7 +2,14 @@ package Model;
 
 public class Board {
    Field[] field;
-   int totalField = 24;
+
+   public Board(){
+
+      
+
+
+   }
+
 
    public int getFieldIndex(int id) {
       return field[id];

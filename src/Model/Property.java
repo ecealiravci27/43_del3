@@ -14,5 +14,4 @@ public class Property {
 
         return ownedProperties[id];
     }
-
 }
