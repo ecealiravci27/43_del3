@@ -11,13 +11,8 @@ public class Board {
    }
 
 
-   public int getFieldIndex(int id) {
+   public Object getFielobject(int id) {
       return field[id];
-   }
-
-
-   public int getField() {
-
    }
 
    public void setupField(int totalField) {
