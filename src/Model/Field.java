@@ -44,7 +44,6 @@ public abstract class Field {
         return fieldName;
     }
 
-
     public String getFieldDescription() {
         return fieldDescription;
     }
