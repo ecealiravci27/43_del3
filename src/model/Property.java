@@ -1,9 +1,9 @@
-package Model;
+package model;
 
 public class Property {
-    boolean[] ownedProperties;
+    int[] ownedProperties;
 
-    public boolean isOwned(int id){
+    public int isOwned(int id){
         return ownedProperties[id];
     }
 

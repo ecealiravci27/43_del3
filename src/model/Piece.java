@@ -1,6 +1,4 @@
-package Model;
-
-import java.util.ArrayList;
+package model;
 
 public class Piece {
     String pieceType;
@@ -9,14 +7,17 @@ public class Piece {
 
 
     private void movePiece(int addMove) {
-        this.totalMoves = addMove;
+        this.totalMoves = totalMoves + addMove;
+    }
+    public void setTotalMoves(int position){
+        this.totalMoves = position;
     }
 
-    private void setPieceType(int a) {
+    void setPieceType(int a) {
         this.pieceType = type[a];
     }
 
-    private int getPieceMoves() {
+    public int getPieceMoves() {
         return totalMoves;
     }
 }
