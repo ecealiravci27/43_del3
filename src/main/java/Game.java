@@ -1,9 +1,11 @@
 import Model.Dice;
 import Model.Player;
+import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 import gui_main.GUI;
 
+import java.awt.*;
 import java.util.Scanner;
 public class Game {
     Scanner in = new Scanner(System.in);
@@ -37,7 +39,7 @@ public class Game {
 
     public static Player setupPlayer(int playerAmount, GUI gui) {
         Scanner in = new Scanner(System.in);
-        System.out.println("hvilken brik vil du have? 1-4?");
+        System.out.println("Select piece by entering a number (1 = Tractor, 2 = Racecar, 3 = UFO, 4 = Car");
         int type = in.nextInt();
         Player player = new Player(type);
         player.setupAccount(playerAmount);
@@ -45,7 +47,28 @@ public class Game {
         Scanner scanner2 = new Scanner(System.in);
         String name = scanner2.nextLine();
         player.setPlayername(name);
-        GUI_Player guiPlayer = new GUI_Player(player.getPlayername(), player.getPlayerAccount().getTotalBalance());
+
+        GUI_Car.Type carType;
+        switch (type) {
+            case 1:
+                carType = GUI_Car.Type.TRACTOR;
+                break;
+            case 2:
+                carType = GUI_Car.Type.RACECAR;
+                break;
+            case 3:
+                carType = GUI_Car.Type.UFO;
+                break;
+            case 4:
+                carType = GUI_Car.Type.CAR;
+                break;
+            default:
+                carType = GUI_Car.Type.CAR;
+        }
+
+        GUI_Car guiCar = new GUI_Car(null, null, carType, GUI_Car.Pattern.FILL);
+
+        GUI_Player guiPlayer = new GUI_Player(player.getPlayername(), player.getPlayerAccount().getTotalBalance(), guiCar);
 
         gui.addPlayer(guiPlayer);
         GUI_Field field = gui.getFields()[0];
