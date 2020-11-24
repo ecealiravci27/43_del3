@@ -19,7 +19,8 @@ public class Player {
             startingBalance = 16;
         }
 
-        Account account = new Account(startingBalance);
+        playerAccount = new Account(startingBalance);
+
     }
 
     public Player(int type) {
@@ -44,6 +45,17 @@ public class Player {
 
     }
 
+    public void setPlayername(String name) {
+        playername = name;
+    }
+
+    public String getPlayername() {
+        return playername;
+    }
+
+    public Account getPlayerAccount() {
+        return playerAccount;
+    }
 
 }
 
