@@ -1,16 +1,12 @@
 import Model.Board;
 import Model.Dice;
 import Model.Player;
-import gui_fields.GUI_Car;
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Player;
+import com.sun.glass.ui.Size;
+import gui_codebehind.GUI_Center;
+import gui_fields.*;
 import gui_main.GUI;
 import java.awt.Color;
-import gui_fields.GUI_Chance;
-import gui_fields.GUI_Jail;
-import gui_fields.GUI_Refuge;
-import gui_fields.GUI_Start;
-import gui_fields.GUI_Street;
+
 import gui_main.GUI;
 
 import java.awt.*;
@@ -22,16 +18,12 @@ public class Game {
 
         //loads board
         Board board = new Board();
-        GUI gui = new GUI(board.setupField());
-
+        GUI gui = new GUI(board.setupField(), Color.white);
 
         Player player;
         Scanner in = new Scanner(System.in);
         int totalPlayers;
         int boardSize = 24;
-
-
-        Dice dice = new Dice();
 
 
         //getting player amount
@@ -51,6 +43,15 @@ public class Game {
                 System.out.println(players[j].getPlayerType());
             }
         }
+
+    }
+
+    public static Dice guiDice(int diceOutcome, GUI gui) {
+        Dice dice = new Dice();
+        dice.rollDice();
+        dice.setDiceOutcome(diceOutcome);
+        gui.setDie(diceOutcome);
+        return dice;
     }
 
     public static Player setupPlayer(int playerAmount, GUI gui) {
