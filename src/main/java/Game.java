@@ -20,6 +20,10 @@ public class Game {
         Board board = new Board();
         GUI gui = new GUI(board.setupField(), Color.white);
 
+        //gui dice showing 6 eyes
+        Dice dice = new Dice();
+        gui.setDie(6);
+
         Player player;
         Scanner in = new Scanner(System.in);
         int totalPlayers;
