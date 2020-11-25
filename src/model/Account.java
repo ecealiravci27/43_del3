@@ -1,5 +1,4 @@
-package Model;
-import Model.Player;
+package model;
 
 public class Account {
 

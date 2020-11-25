@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 
 public class Player {
@@ -9,6 +9,12 @@ public class Player {
     int playerPosition;
     int playerType;
 
+    public Player(int type) {
+        this.playerPosition = 0;
+        this.playerType = type;
+        this.playerPiece = new Piece();
+    }
+
     public void setupAccount(int totalPlayers) {
         int startingBalance = 0;
         if (totalPlayers == 2) {
@@ -18,15 +24,12 @@ public class Player {
         } else if (totalPlayers == 4) {
             startingBalance = 16;
         }
-
-        Account account = new Account(startingBalance);
+        Account playerAccount = new Account(startingBalance);
     }
 
-    public Player(int type) {
-        this.playerPosition = 0;
-        this.playerType = type;
+    public void setPlayerPiece(int position){
+       playerPiece.setTotalMoves (position);
     }
-
 
     public int getPlayerType() {
         return playerType;

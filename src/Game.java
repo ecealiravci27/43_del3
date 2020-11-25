@@ -1,14 +1,20 @@
-import Model.Board;
-import Model.Dice;
-import Model.Player;
+import model.Board;
+import model.Dice;
+import model.Field;
+import model.Player;
 
+import java.util.Arrays;
 import java.util.Scanner;
 public class Game {
-
-    Board board = new Board();
     Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
+        Player player;
+        Board board = new Board();
         Scanner in = new Scanner(System.in);
+        Dice dice = new Dice();
+        Field[] fields = board.setupField();
+        fields[0].getFieldName();
+        System.out.println((Arrays.toString(fields[0].getAllRules())));
         int totalPlayers;
 
         //getting player amount
@@ -16,7 +22,6 @@ public class Game {
         totalPlayers = in.nextInt();
         //initializing player object array
         Player[] players = new Player[totalPlayers];
-
         for (int j = 0; j < totalPlayers; j++) {
             if (j == 0) {
                 System.out.println("The youngest starts");
@@ -36,5 +41,4 @@ public class Game {
         int type = in.nextInt();
         return new Player(type);
     }
-
 }
