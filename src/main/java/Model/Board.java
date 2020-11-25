@@ -1,45 +1,177 @@
 package Model;
 
+import gui_fields.*;
+
+import java.awt.*;
+
 public class Board {
-   Field[] field;
+   GUI_Field[] field;
 
    public Board(){
-      this.field = setupField();
+      field = setupField();
    }
 
    public Object getFieldobject(int id) {
       return field[id];
    }
 
-   public Field[] setupField() {
-      //fieldDescription er ikke skrevet ordentligt endnu
-      field = new Field[24];
-      field[0] = new CornerField("start",false, 2); //der skal også gives 2m hvis man også går forbi startfeltet. må finde ud af hvordan
-      field[1] = new PropertyField ("Burgerbaren","nom nom","brown",1 );
-      field[2] = new PropertyField("pizzahuset", "wow pizza", "brown", 1);
-      field[3] = new ChanceField();
-      field[4] = new PropertyField("slikbutikken", "sluk :D","silver", 1);
-      field[5] = new PropertyField("iskiosken", "nøj, slik", "silver", 1);
-      field[6] = new CornerField("Fængsel", false, 0);
-      field[7] = new PropertyField("museet", "museum wow", "purple", 2);
-      field[8] = new PropertyField("bibliotek", "study study", "purple", 2);
-      field[9] = new ChanceField();
-      field[10]= new PropertyField("skaterparken", "skating yay", "cream", 2);
-      field[11] = new PropertyField( "swimmingpool", "swim swim", "cream", 2);
-      field[12] = new CornerField("parkeringsplads", false, 0);
-      field[13] = new PropertyField("spillehallen", "games!", "red", 3);
-      field[14] = new PropertyField("biograffen", "popcorn woo", "red", 3);
-      field[15] = new ChanceField();
-      field[16] = new PropertyField("legetøjsbutikken", "play play", "yellow", 3);
-      field[17] = new PropertyField("dyrehandlen", "animal sounds", "yellow", 3);
-      field[18] = new CornerField("police", true, 0);
-      field[19] = new PropertyField("bowlinghallen", "strike!", "green", 4);
-      field[20] = new PropertyField("zoo", "monkeys :D", "green", 4);
-      field[21] = new ChanceField();
-      field[22] = new PropertyField("vandlandet", "swosh", "blue", 5);
-      field[23] = new PropertyField("strandpromaden", "??", "blue", 5);
-      return field;
+   public GUI_Field[] setupField() {
+      GUI_Field[] fields = new GUI_Field[24];
 
+
+
+      //START
+      fields[0] = new GUI_Start();
+      fields[0].setTitle("Start");
+      fields[0].setDescription("Modtag 2 når du passerer");
+      fields[0].setSubText("Modtag 2 når du passerer");
+      fields[0].setBackGroundColor(Color.white);
+
+      fields[1] = new GUI_Street();
+      fields[1].setTitle("Burgerbaren");
+      fields[1].setDescription("Nom nom");
+      fields[1].setSubText("1");
+      fields[1].setBackGroundColor(new Color(109, 81, 51));
+
+      fields[2] = new GUI_Street();
+      fields[2].setTitle("Pizzeriaet");
+      fields[2].setDescription("");
+      fields[2].setSubText("1");
+      fields[2].setBackGroundColor(new Color(109, 81, 51));
+
+      //CHANCE
+      fields[3] = new GUI_Chance();
+      fields[3].setTitle("Chance");
+      fields[3].setDescription("");
+      fields[3].setSubText("");
+      fields[3].setBackGroundColor(Color.white);
+
+      fields[4] = new GUI_Street();
+      fields[4].setTitle("Slikbutikken");
+      fields[4].setDescription("");
+      fields[4].setSubText("1");
+      fields[4].setBackGroundColor(new Color(121, 175, 194));
+
+      fields[5] = new GUI_Street();
+      fields[5].setTitle("Iskiosken");
+      fields[5].setDescription("");
+      fields[5].setSubText("1");
+      fields[5].setBackGroundColor(new Color(121, 175, 194));
+
+      //JAIL/VISITATION
+      fields[6] = new GUI_Jail();
+      fields[6].setSubText("På besøg");
+      fields[6].setBackGroundColor(Color.white);
+
+
+      fields[7] = new GUI_Street();
+      fields[7].setTitle("Museet");
+      fields[7].setDescription("");
+      fields[7].setSubText("2");
+      fields[7].setBackGroundColor(new Color(212, 90, 150));
+
+      fields[8] = new GUI_Street();
+      fields[8].setTitle("Biblioteket");
+      fields[8].setDescription("");
+      fields[8].setSubText("2");
+      fields[8].setBackGroundColor(new Color(212, 90, 150));
+
+      fields[9] = new GUI_Chance();
+      fields[9].setTitle("Chance");
+      fields[9].setDescription("");
+      fields[9].setSubText("");
+      fields[9].setBackGroundColor(Color.white);
+
+      fields[10] = new GUI_Street();
+      fields[10].setTitle("Skaterparken");
+      fields[10].setDescription("");
+      fields[10].setSubText("2");
+      fields[10].setBackGroundColor(new Color(224, 189, 100));
+
+      fields[11] = new GUI_Street();
+      fields[11].setTitle("Swimmingpoolen");
+      fields[11].setDescription("");
+      fields[11].setSubText("2");
+      fields[11].setBackGroundColor(new Color(224, 189, 100));
+
+      //FREE PARKING
+      fields[12] = new GUI_Refuge();
+      fields[12].setDescription("");
+      fields[12].setTitle("Gratis parkering");
+      fields[12].setSubText("Gratis parkering");
+      fields[12].setBackGroundColor(Color.white);
+
+      fields[13] = new GUI_Street();
+      fields[13].setTitle("Spillehallen");
+      fields[13].setDescription("");
+      fields[13].setSubText("3");
+      fields[13].setBackGroundColor(new Color(182, 67, 52));
+
+      fields[14] = new GUI_Street();
+      fields[14].setTitle("Biografen");
+      fields[14].setDescription("");
+      fields[14].setSubText("3");
+      fields[14].setBackGroundColor(new Color(182, 67, 52));
+
+      fields[15] = new GUI_Chance();
+      fields[15].setTitle("Chance");
+      fields[15].setDescription("");
+      fields[15].setSubText("");
+      fields[15].setBackGroundColor(Color.white);
+
+      fields[16] = new GUI_Street();
+      fields[16].setTitle("Lejetøjsbutikken");
+      fields[16].setDescription("");
+      fields[16].setSubText("3");
+      fields[16].setBackGroundColor(new Color(244, 255, 0));
+
+      fields[17] = new GUI_Street();
+      fields[17].setTitle("Dyrehandlen");
+      fields[17].setDescription("");
+      fields[17].setSubText("3");
+      fields[17].setBackGroundColor(new Color(244, 255, 0));
+
+      //GO TO JAIL
+      fields[18] = new GUI_Jail();
+      fields[18].setDescription("");
+      fields[18].setTitle("Gå i fængsel");
+      fields[18].setSubText("Gå i fængsel");
+      fields[18].setBackGroundColor(Color.white);
+
+      fields[19] = new GUI_Street();
+      fields[19].setTitle("Bowlinghallen");
+      fields[19].setDescription("");
+      fields[19].setSubText("4");
+      fields[19].setBackGroundColor(new Color(1, 104, 38));
+
+      fields[20] = new GUI_Street();
+      fields[20].setTitle("Zoo");
+      fields[20].setDescription("");
+      fields[20].setSubText("4");
+      fields[20].setBackGroundColor(new Color(1, 104, 38));
+
+      fields[21] = new GUI_Chance();
+      fields[21].setTitle("Chance");
+      fields[21].setDescription("");
+      fields[21].setSubText("");
+      fields[21].setBackGroundColor(Color.white);
+
+      fields[22] = new GUI_Street();
+      fields[22].setTitle("Vandlandet");
+      fields[22].setDescription("");
+      fields[22].setSubText("5");
+      fields[22].setBackGroundColor(new Color(0, 51, 83));
+      fields[22].setForeGroundColor(new Color(255, 255, 255));
+
+
+      fields[23] = new GUI_Street();
+      fields[23].setTitle("Strandpromenaden");
+      fields[23].setDescription("");
+      fields[23].setSubText("5");
+      fields[23].setBackGroundColor(new Color(0, 51, 83));
+      fields[23].setForeGroundColor(new Color(255, 255, 255));
+
+      return fields;
    }
 
 }

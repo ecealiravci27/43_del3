@@ -1,8 +1,16 @@
+import Model.Board;
 import Model.Dice;
 import Model.Player;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
+import gui_main.GUI;
+import java.awt.Color;
+import gui_fields.GUI_Chance;
+import gui_fields.GUI_Jail;
+import gui_fields.GUI_Refuge;
+import gui_fields.GUI_Start;
+import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 import java.awt.*;
@@ -11,12 +19,20 @@ public class Game {
     Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-        GUI gui = new GUI();
+
+        //loads board
+        Board board = new Board();
+        GUI gui = new GUI(board.setupField());
+
+
         Player player;
         Scanner in = new Scanner(System.in);
         int totalPlayers;
         int boardSize = 24;
+
+
         Dice dice = new Dice();
+
 
         //getting player amount
         System.out.println("How many players?");
@@ -48,6 +64,7 @@ public class Game {
         String name = scanner2.nextLine();
         player.setPlayername(name);
 
+        //allows user to select between 4 pieces
         GUI_Car.Type carType;
         switch (type) {
             case 1:
