@@ -3,16 +3,34 @@ package model;
 public class Property {
     int[] ownedProperties;
 
-    public int isOwned(int id){
-        return ownedProperties[id];
+    public Property() {
+        this.ownedProperties = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     }
 
-    public boolean buyProperty(int id){
-        if (isOwned(id)) {
+    public boolean isOwned(int id) {
+        if (ownedProperties[id] == 1) {
+            return true;
+        }
+        if (ownedProperties[id] == 2) {
+            return true;
+        }
+        if (ownedProperties[id] == 3) {
+            return true;
+        }
+        if (ownedProperties[id] == 4) {
+            return true;
+        }
+        if (ownedProperties[id] == 0) {
             return false;
         }
-
-        return ownedProperties[id];
-
+        return false;
     }
+    public void buy(int field, int playertype){
+        ownedProperties[field] = playertype;
+    }
+
+
+
+
+
 }
