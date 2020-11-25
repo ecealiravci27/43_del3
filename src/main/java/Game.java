@@ -50,13 +50,21 @@ public class Game {
 
     }
 
-    /*public static Dice guiDice(int diceOutcome, GUI gui) { //ide til hvordan man måske kan lave gui terning. virker ikke endnu
+/*
+    public static Dice roll(int eyes, GUI gui) {
         Dice dice = new Dice();
         dice.rollDice();
-        dice.setDiceOutcome(diceOutcome);
-        gui.setDie(diceOutcome);
+        dice.setDiceOutcome(eyes);
+        gui.setDie(eyes);
+
+        gui.showMessage("Click the button to roll");
+        Button button = new Button("Roll");
+
         return dice;
+
+
     }*/
+
 
     public static Player setupPlayer(int playerAmount, GUI gui) {
         Scanner in = new Scanner(System.in);
