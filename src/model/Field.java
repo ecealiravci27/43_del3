@@ -7,6 +7,13 @@ public abstract class Field {
     protected boolean drawCard;
     protected boolean attemptPurchase;
     protected boolean goToJail;
+    protected boolean goToStart;
+    protected boolean goToStrandPromade;
+    protected boolean canEscape;
+    protected boolean goToColor;
+    protected boolean goUpToFive;
+    protected boolean birthday;
+    protected int movePiece;
     protected int changeMoney;
     protected int fieldValue;
 
@@ -17,6 +24,13 @@ public abstract class Field {
         this.drawCard = false;
         this.attemptPurchase = false;
         this.goToJail = false;
+        this.goToStart = false;
+        this.goToStrandPromade = false;
+        this.canEscape = false;
+        this.goToColor = false;
+        this.goUpToFive = false;
+        this.birthday = false;
+        this.movePiece = 0;
         this.changeMoney = 0;
         this.fieldValue = 0;
     }
@@ -25,10 +39,10 @@ public abstract class Field {
         return new String[]{fieldName,fieldDescription, color};
     }
     public boolean[] getBooleanRules(){
-        return new boolean[]{drawCard,attemptPurchase, goToJail};
+        return new boolean[]{drawCard,attemptPurchase, goToJail, goToStart, goToStrandPromade, canEscape, goToColor, goUpToFive, birthday};
     }
     public int[] getIntRules(){
-        return new int[]{changeMoney,fieldValue};
+        return new int[]{changeMoney,fieldValue, movePiece};
     }
 
     public Object[] getAllRules(){
@@ -36,8 +50,7 @@ public abstract class Field {
         boolean[] booleanR = getBooleanRules();
         int[] intR = getIntRules();
 
-        Object[] allR = new Object[]{stringR[0],stringR[1],stringR[2],booleanR[0],booleanR[1],booleanR[2], intR[0],intR[1]};
-        return allR;
+        return new Object[]{stringR[0],stringR[1],stringR[2],booleanR[0],booleanR[1],booleanR[2],booleanR[3],booleanR[4],booleanR[5],booleanR[6],booleanR[7], booleanR[8], intR[0],intR[1], intR[2]};
     }
 
     public String getFieldName(){

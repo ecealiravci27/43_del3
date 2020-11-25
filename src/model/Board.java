@@ -3,8 +3,6 @@ package model;
 public class Board {
    Field[] field;
 
-
-
    public Board(){
       this.field = setupField();
    }
@@ -19,8 +17,8 @@ public class Board {
       field[1] = new PropertyField ("Burgerbaren","nom nom","brown",1 );
       field[2] = new PropertyField("pizzahuset", "wow pizza", "brown", 1);
       field[3] = new ChanceField();
-      field[4] = new PropertyField("slikbutikken", "sluk :D","silver", 1);
-      field[5] = new PropertyField("iskiosken", "nøj, slik", "silver", 1);
+      field[4] = new PropertyField("slikbutikken", "sluk :D","light blue", 1);
+      field[5] = new PropertyField("iskiosken", "nøj, slik", "light blue", 1);
       field[6] = new CornerField("Fængsel", false, 0);
       field[7] = new PropertyField("museet", "museum wow", "purple", 2);
       field[8] = new PropertyField("bibliotek", "study study", "purple", 2);
