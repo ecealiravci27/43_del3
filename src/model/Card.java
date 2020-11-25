@@ -6,9 +6,10 @@ public class Card extends Field {
         this.goToStart = goToStart;
         this.goToColor = goToColor;
         this.goToStrandPromade = goToStrandPromade;
-        this.goUpToFive = goUpToFive;
         this.canEscape = canEscape;
+        this.goUpToFive = goUpToFive;
         this.changeMoney = changeMoney;
         this.movePiece = movePiece;
+        this.color = color;
    }
 }
