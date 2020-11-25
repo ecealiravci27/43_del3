@@ -3,16 +3,17 @@ package Model;
 public class Board {
    Field[] field;
 
+
+
    public Board(){
       this.field = setupField();
    }
 
-   public Object getFieldobject(int id) {
+   public Field getFielobject(int id) {
       return field[id];
    }
 
    public Field[] setupField() {
-      //fieldDescription er ikke skrevet ordentligt endnu
       field = new Field[24];
       field[0] = new CornerField("start",false, 2); //der skal også gives 2m hvis man også går forbi startfeltet. må finde ud af hvordan
       field[1] = new PropertyField ("Burgerbaren","nom nom","brown",1 );
@@ -37,9 +38,8 @@ public class Board {
       field[20] = new PropertyField("zoo", "monkeys :D", "green", 4);
       field[21] = new ChanceField();
       field[22] = new PropertyField("vandlandet", "swosh", "blue", 5);
-      field[23] = new PropertyField("strandpromaden", "??", "blue", 5);
-      return field;
 
+      return field;
    }
 
 }

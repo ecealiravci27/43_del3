@@ -1,15 +1,15 @@
+import Model.Board;
 import Model.Dice;
 import Model.Player;
 
 import java.util.Scanner;
 public class Game {
+
+    Board board = new Board();
     Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
-        Player player;
         Scanner in = new Scanner(System.in);
         int totalPlayers;
-        int boardSize = 24;
-        Dice dice = new Dice();
 
         //getting player amount
         System.out.println("How many players?");
@@ -36,4 +36,5 @@ public class Game {
         int type = in.nextInt();
         return new Player(type);
     }
+
 }
