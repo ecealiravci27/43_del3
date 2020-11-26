@@ -9,7 +9,7 @@ public class Game {
     Board board;
 
     Scanner in = new Scanner(System.in);
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         //Dice dice;
         //Player player;
         Board board = new Board();
@@ -37,7 +37,8 @@ public class Game {
                 System.out.println(players[j].getPlayerType());
             }
         }
-    }
+
+    }*/
 
     public static Player setupPlayer() {
         Scanner in = new Scanner(System.in);
@@ -48,13 +49,23 @@ public class Game {
 
     private void doRule() {
 
+        System.out.println(board.getFielobject(5));
     }
 
-    private void playTurn() {
-
+    public void playTurn() {
+        //Game rolls the dice
         dice.rollDice();
+        //Game calls for the given player to move their piece based on diceOutcome
         player.movePlayerPiece(dice.getDiceOutcome());
+        //Game calls Board to have a field object return based on diceOutcomme
         board.getFielobject(player.getPieceMoves());
+    }
+
+    public static void main(String[] args) {
+
+        Board testBoard = new Board();
+
+        System.out.println(testBoard.getFielobject(5).getBooleanRules(4));
     }
 
 
