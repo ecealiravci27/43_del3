@@ -10,21 +10,32 @@ public class Game {
 
     Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
-        //Dice dice;
-        //Player player;
+
+        //initializing variables
+
+        //initializing objects. player array needs an input variable so its done later
         Board board = new Board();
+        Dice dice = new Dice();
         Scanner in = new Scanner(System.in);
-        //Dice dice = new Dice();
-        Field[] fields = board.setupField();
+        Property property = new Property();
+        Field[] field = board.setupField();
+        Player[] players = setupPlayers();
 
-        fields[0].getFieldName();
-        System.out.println((Arrays.toString(fields[0].getAllRules())));
-        int totalPlayers;
+        doRule(field[0], players[0]);
 
-        //getting player amount
+        }
+    private static Player setupPlayer() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("hvilken brik vil du have? 1-4?");
+        int type = in.nextInt();
+        return new Player(type);
+    }
+
+    public static Player[] setupPlayers() {
+
+        Scanner in = new Scanner(System.in);
         System.out.println("How many players?");
-        totalPlayers = in.nextInt();
-        //initializing player object array
+        int totalPlayers = in.nextInt();
         Player[] players = new Player[totalPlayers];
         for (int j = 0; j < totalPlayers; j++) {
             if (j == 0) {
@@ -37,16 +48,36 @@ public class Game {
                 System.out.println(players[j].getPlayerType());
             }
         }
+        return players;
     }
 
-    public static Player setupPlayer() {
-        Scanner in = new Scanner(System.in);
-        System.out.println("hvilken brik vil du have? 1-4?");
-        int type = in.nextInt();
-        return new Player(type);
-    }
+    private static void doRule(Field field, Player player) {
+        Object[] rules = field.getAllRules();
+        System.out.println("player with piece type " + player.getPlayerType() + " is doing rules for " + rules[0].toString());
+        System.out.println("description: " + rules[1]);
 
-    private void doRule() {
+
+
+
+
+        //this.fieldName = "";
+        //this.fieldDescription = "";
+        //this.color = "";
+        //this.drawCard = false;
+        //this.attemptPurchase = false;
+        //this.goToJail = false;
+        //this.goToStart = false;
+        //this.goToStrandPromade = false;
+        //this.canEscape = false;
+        //this.goToColor = false;
+        //this.goUpToFive = false;
+        //this.birthday = false;
+        //this.movePiece = 0;
+        //this.changeMoney = 0;
+        //this.fieldValue = 0;
+
+
+
 
     }
 

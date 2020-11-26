@@ -28,9 +28,9 @@ public class Property {
     public void buy(int field, int playertype){
         ownedProperties[field] = playertype;
     }
-
-
-
+    public int getOwner (int fieldIndex){
+        return ownedProperties[fieldIndex];
+    }
 
 
 }
