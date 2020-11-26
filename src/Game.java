@@ -63,9 +63,35 @@ public class Game {
 
     public static void main(String[] args) {
 
+        int obj = 13;
+
         Board testBoard = new Board();
 
-        System.out.println(testBoard.getFielobject(5).getBooleanRules(4));
+        System.out.println(testBoard.getFielobject(obj).getBooleanRules(0));
+
+
+        //The field is a card
+        //Game draws card and executes it's effect
+        if (testBoard.getFielobject(obj).getBooleanRules(0)==true) {
+
+        }
+
+        //The field is ownable
+        //Game checks if field is owned and possibly tells player(s) to change in their totalBalance
+        if (testBoard.getFielobject(obj).getBooleanRules(1)==true) {
+
+
+        }
+
+        //The field is go to jail field
+        //Game calls player to move their piece
+        if (testBoard.getFielobject(obj).getBooleanRules(2)==true) {
+
+
+        }
+
+
+
     }
 
 

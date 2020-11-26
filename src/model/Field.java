@@ -39,7 +39,6 @@ public abstract class Field {
 
         String stringRule[];
         stringRule = new String[3];
-
         stringRule[0]=fieldName;
         stringRule[1]=fieldDescription;
         stringRule[2]=color;
@@ -49,10 +48,8 @@ public abstract class Field {
         return stringRule[id];
     }
     public boolean getBooleanRules(int id){
-
         boolean booleanRule[];
         booleanRule = new boolean[8];
-
         booleanRule[0]=drawCard;
         booleanRule[1]=attemptPurchase;
         booleanRule[2]=goToJail;
@@ -68,7 +65,6 @@ public abstract class Field {
     }
 
     public int getIntRules(int id){
-
         int intRule[];
         intRule = new int[3];
 
