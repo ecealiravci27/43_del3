@@ -21,7 +21,7 @@ public class Game {
         Field[] field = board.setupField();
         Player[] players = setupPlayers();
 
-        doRule(field[0], players[0]);
+        doRule(field[0], players[], property,);
 
         }
     private static Player setupPlayer() {
@@ -48,18 +48,36 @@ public class Game {
                 System.out.println(players[j].getPlayerType());
             }
         }
+        for (int i = 0; i <totalPlayers ; i++) {
+            int startingBalance = 0;
+            if (totalPlayers == 2) {
+                startingBalance = 20;
+            } else if (totalPlayers == 3) {
+                startingBalance = 18;
+            } else if (totalPlayers == 4) {
+                startingBalance = 16;
+            }
+            players[i].setMoney(startingBalance);
+        }
+
         return players;
     }
 
-    private static void doRule(Field field, Player player) {
+
+    private static void doRule(Field field, Player[] player, Property property, int active) {
         Object[] rules = field.getAllRules();
-        System.out.println("player with piece type " + player.getPlayerType() + " is doing rules for " + rules[0].toString());
+        System.out.println("player with piece type " + player[active].getPlayerType() + " is doing rules for " + rules[0].toString());
         System.out.println("description: " + rules[1]);
 
+        if (rules [4]){
+            int owner = property.getOwner();
+            player[active];
 
+            for (int i = 0; i < 3; i++) {
 
+            }
 
-
+        }
         //this.fieldName = "";
         //this.fieldDescription = "";
         //this.color = "";
@@ -75,8 +93,6 @@ public class Game {
         //this.movePiece = 0;
         //this.changeMoney = 0;
         //this.fieldValue = 0;
-
-
 
 
     }

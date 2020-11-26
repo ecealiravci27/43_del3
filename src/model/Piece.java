@@ -5,24 +5,24 @@ public class Piece {
     int totalMoves;
     String[] type = new String[]{"Cat", "Dog", "Boat", "Car"};
 
+    public Piece(int playertype){
+        this.totalMoves = 0;
+        this.pieceType = type[playertype - 1];
+
+    }
 
     public void movePiece(int addMove) {
-
-        this.totalMoves = totalMoves + addMove;
+        totalMoves = totalMoves + addMove;
     }
 
     public void setTotalMoves(int position){
-
-        this.totalMoves = position;
-    }
-
-    void setPieceType(int a) {
-
-        this.pieceType = type[a];
+        totalMoves = position;
     }
 
     public int getPieceMoves() {
-
         return totalMoves;
+    }
+    public String getPieceType(){
+        return pieceType;
     }
 }

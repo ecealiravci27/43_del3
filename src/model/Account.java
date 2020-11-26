@@ -5,14 +5,11 @@ public class Account {
         private int totalBalance;
         private int balanceToBankruptcy;
 
-        public Account(int balance){
-            this.totalBalance = balance;
+        public Account(){
+            this.totalBalance = 1;
             this.balanceToBankruptcy = 0;
         }
 
-        public void setStartingBalace(int playerAmount){
-
-        }
 
         public void changeTotalBalance(int change){
             totalBalance = totalBalance + change;
@@ -21,6 +18,13 @@ public class Account {
                 totalBalance = 0;
             }
         }
+
+        public void setTotalBalance(int money){
+            totalBalance = money;
+        }
+
+
+
 
         public int getTotalBalance(){
             return totalBalance;

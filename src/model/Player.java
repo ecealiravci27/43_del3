@@ -12,28 +12,16 @@ public class Player {
     public Player(int type) {
         this.playerPosition = 0;
         this.playerType = type;
-        this.playerPiece = new Piece();
+        this.playerPiece = new Piece(type);
+        this.playerAccount = new Account(); ;
     }
 
-    public void setupAccount(int totalPlayers) {
-        int startingBalance = 0;
-        if (totalPlayers == 2) {
-            startingBalance = 20;
-        } else if (totalPlayers == 3) {
-            startingBalance = 18;
-        } else if (totalPlayers == 4) {
-            startingBalance = 16;
-        }
-        Account playerAccount = new Account(startingBalance);
-    }
 
     public void movePlayerPiece(int addMove) {
-
         playerPiece.movePiece(addMove);
     }
 
     public int getPieceMoves() {
-
         return playerPiece.getPieceMoves();
     }
 
@@ -43,6 +31,13 @@ public class Player {
 
     public int getPlayerType() {
         return playerType;
+    }
+
+    public void changeMoney(int money){
+        playerAccount.changeTotalBalance(money);
+    }
+    public void setMoney(int money){
+        playerAccount.setTotalBalance(money);
     }
 
     public void changePiecePosition(int changePosition) {
