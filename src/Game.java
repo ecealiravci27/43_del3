@@ -20,13 +20,50 @@ public class Game {
         CardPile pile = new CardPile();
         Scanner in = new Scanner(System.in);
         Property property = new Property();
-        Player[] players = setupPlayers();
+        Player[] player = setupPlayers();
+        int playerturn = 0;
 
-    }
+            while (!checkBancrupcy(player)) {
+                playerturn = playerturn % player.length;
+                player[playerturn].movePlayerPiece(dice.rollDice());
+                int position = (player[playerturn].getPieceMoves())%23;
+                System.out.println(position);
+                doRule(board.getField(position), pile, player, property, playerturn);
+                playerturn++;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private static Player setupPlayer() {
         Scanner in = new Scanner(System.in);
-        System.out.println("hvilken brik vil du have? 1-4?");
+        System.out.println("What piece do you want? 1-4?");
         int type = in.nextInt();
         return new Player(type);
     }
@@ -40,11 +77,9 @@ public class Game {
             if (j == 0) {
                 System.out.println("The youngest starts");
                 players[j] = setupPlayer();
-                System.out.println(players[j].getPlayerType());
             }
             if (j >= 1) {
                 players[j] = setupPlayer();
-                System.out.println(players[j].getPlayerType());
             }
         }
         for (int i = 0; i < totalPlayers; i++) {
@@ -64,7 +99,8 @@ public class Game {
 
 
 
-    public void doRule(Field field,CardPile pile, Player[] player, Property property, int active, int position) {
+    public static void doRule(Field field,CardPile pile, Player[] player, Property property, int active) {
+        int position = player[active].getPlayerPosition();
         Object[] rules = field.getAllRules();
         boolean[] rulesB = field.getBooleanRules();
         System.out.println("player with piece type " + player[active].getPlayerType() + " is doing rules for " + rules[0].toString());
@@ -73,7 +109,6 @@ public class Game {
         if (rulesB[0]) {
             Card card = pile.drawCard();
             doCard(card, player, active);
-
         }
         if (rulesB[1]) {
             int owner = property.getOwner(position);
@@ -91,7 +126,6 @@ public class Game {
 
         }
     }
-
 
     public static void doCard(Card card, Player[] player, int active) {
         boolean[] rulesB = card.getBooleanRules();
@@ -156,27 +190,16 @@ public class Game {
         }
     }
 
+    public static void movePlayer(Player player) {
 
-    //this.fieldName = "";
-    //this.fieldDescription = "";
-    //this.color = "";
-    //this.drawCard = false;
-    //this.attemptPurchase = false;
-    //this.goToJail = false;
-    //this.goToStart = false;
-    //this.goToStrandPromade = false;
-    //this.canEscape = false;
-    //this.goToColor = false;
-    //this.goUpToFive = false;
-    //this.birthday = false;
-    //this.movePiece = 0;
-    //this.changeMoney = 0;
-    //this.fieldValue = 0;
-
-    private void playTurn() {
-        dice.rollDice();
-        player.movePlayerPiece(dice.getDiceOutcome());
-        board.getFielobject(player.getPieceMoves());
     }
 
+    public static boolean checkBancrupcy (Player[] player) {
+        for (int i = 0; i < player.length; i++) {
+            if (player[i].isBancrupt()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -46,4 +46,8 @@ public class Board {
       return field;
    }
 
+   public Field getField(int position){
+      return field[position];
+   }
+
 }

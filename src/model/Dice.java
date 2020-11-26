@@ -3,18 +3,12 @@ package model;
 public class Dice {
     int diceOutcome;
 
-
-    public int getDiceOutcome() {
-
-        return diceOutcome;
-    }
-
-    public void rollDice() {
+    public int rollDice() {
         int maxEye = 6;
         int minEye = 1;
         this.diceOutcome = (int) ((Math.random() * maxEye) + minEye);
+        return diceOutcome;
     }
-
     public void setDiceOutcome(int diceOutcome) {
         this.diceOutcome = diceOutcome;
     }

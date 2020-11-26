@@ -11,9 +11,9 @@ public class Player {
     boolean canEscape;
 
     public Player(int type) {
-        this.playerPosition = 0;
         this.playerType = type;
         this.playerPiece = new Piece(type);
+        this.playerPosition = (playerPiece.getPieceMoves()%23);
         this.playerAccount = new Account();
         this.canEscape = false;
     }
@@ -51,11 +51,11 @@ public class Player {
     public boolean getCanEscape(){
         return canEscape;
     }
-
-
-
-
-    public void changePiecePosition(int changePosition) {
+    public int getPlayerPosition() {
+        return playerPosition;
+    }
+    public boolean isBancrupt(){
+        return playerAccount.isBancrupt();
     }
 
 }

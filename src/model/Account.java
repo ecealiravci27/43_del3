@@ -3,13 +3,12 @@ package model;
 public class Account {
 
         private int totalBalance;
-        private int balanceToBankruptcy;
+        private final int balanceToBankruptcy;
 
         public Account(){
             this.totalBalance = 1;
             this.balanceToBankruptcy = 0;
         }
-
 
         public void changeTotalBalance(int change){
             totalBalance = totalBalance + change;
@@ -22,9 +21,9 @@ public class Account {
         public void setTotalBalance(int money){
             totalBalance = money;
         }
-
-
-
+        public boolean isBancrupt(){
+            return totalBalance == balanceToBankruptcy;
+        }
 
         public int getTotalBalance(){
             return totalBalance;

@@ -10,7 +10,6 @@ public class CardPile{
         this.cardIndex = (int) (Math.random()*7);
     }
 
-
     public Field[] setupCard() {
         card = new Card[8];
         card[0] = new Card(true,false, false, false, false,false,  2,0, "");
@@ -26,9 +25,11 @@ public class CardPile{
 
     public Card drawCard(){
         cardIndex++;
+        if (cardIndex>7) {
+            cardIndex = cardIndex % 7;
+        }
         return (Card) card[cardIndex-1];
 
     }
-
 
 }
