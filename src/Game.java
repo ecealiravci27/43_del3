@@ -24,41 +24,20 @@ public class Game {
         int playerturn = 0;
 
             while (!checkBancrupcy(player)) {
-                playerturn = playerturn % player.length;
+                playerturn = playerturn%(player.length);
+                System.out.println(playerturn);
                 player[playerturn].movePlayerPiece(dice.rollDice());
                 int position = (player[playerturn].getPieceMoves())%23;
                 System.out.println(position);
                 doRule(board.getField(position), pile, player, property, playerturn);
+
+                if(player[playerturn].getMoney() = 0){
+                    System.out.println("game over");
+                    break;
+                }
                 playerturn++;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private static Player setupPlayer() {
@@ -113,15 +92,12 @@ public class Game {
         if (rulesB[1]) {
             int owner = property.getOwner(position);
             int change = (Integer) rules[14];
-            if (owner == active) {
-                return;
-            }
             if (owner == 0) {
                 player[active].changeMoney((change));
                 property.buy(position, player[active].getPlayerType());
             } else {
                 player[active].changeMoney(-(change));
-                player[owner].changeMoney(-(change));
+                player[owner].changeMoney((change));
             }
 
         }

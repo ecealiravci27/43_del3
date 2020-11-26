@@ -57,6 +57,8 @@ public class Player {
     public boolean isBancrupt(){
         return playerAccount.isBancrupt();
     }
-
+    public int getMoney(){
+        return playerAccount.getTotalBalance();
+    }
 }
 

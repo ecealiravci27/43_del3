@@ -22,7 +22,12 @@ public class Account {
             totalBalance = money;
         }
         public boolean isBancrupt(){
-            return totalBalance == balanceToBankruptcy;
+            if (totalBalance == balanceToBankruptcy){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
 
         public int getTotalBalance(){
