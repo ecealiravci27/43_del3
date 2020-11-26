@@ -35,18 +35,9 @@ public class Player {
         return playerType;
     }
 
-    public void setupProperty() {
-
-    }
-
     public void changePiecePosition(int changePosition) {
 
     }
-
-    public void purchaseProperty(String field){
-
-    }
-
 
 }
 

@@ -41,4 +41,13 @@ public class Game {
         int type = in.nextInt();
         return new Player(type);
     }
+
+    private void doRule() {
+
+        /**
+         * Terningen kastes for spilleren
+         */
+
+    }
+
 }
