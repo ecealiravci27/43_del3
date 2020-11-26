@@ -50,20 +50,22 @@ public class Game {
 
     }
 
-/*
-    public static Dice roll(int eyes, GUI gui) {
+
+    public static Dice roll(int eyes, GUI gui, GUI_Player guiPlayer, Player player) {
         Dice dice = new Dice();
         dice.rollDice();
         dice.setDiceOutcome(eyes);
         gui.setDie(eyes);
+        System.out.println(player.getPosition());
 
-        gui.showMessage("Click the button to roll");
-        Button button = new Button("Roll");
+        // Remove previous reference to gui piece
+        gui.getFields()[player.getPosition()].setCar(guiPlayer, false);
 
+        // Move position for piece
+        gui.getFields()[eyes].setCar(guiPlayer, true);
+        player.setPosition(eyes);
         return dice;
-
-
-    }*/
+    }
 
 
     public static Player setupPlayer(int playerAmount, GUI gui) {
@@ -101,8 +103,17 @@ public class Game {
         GUI_Player guiPlayer = new GUI_Player(player.getPlayername(), player.getPlayerAccount().getTotalBalance(), guiCar);
 
         gui.addPlayer(guiPlayer);
+
+
         GUI_Field field = gui.getFields()[0];
         field.setCar(guiPlayer, true);
+
+        String answer = gui.getUserButtonPressed("Your turn: ", "Roll");
+
+        if (answer.equals("Roll")) {
+            roll(2, gui, guiPlayer, player);
+        }
+
         return player;
     }
 }

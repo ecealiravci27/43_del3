@@ -28,6 +28,13 @@ public class Player {
         this.playerType = type;
     }
 
+    public int getPosition(){
+        return playerPosition;
+    }
+
+    public void setPosition(int playerPosition) {
+        this.playerPosition = playerPosition;
+    }
 
     public int getPlayerType() {
         return playerType;
