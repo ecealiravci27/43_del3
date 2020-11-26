@@ -8,12 +8,14 @@ public class Player {
     Property playerProperty;
     int playerPosition;
     int playerType;
+    boolean canEscape;
 
     public Player(int type) {
         this.playerPosition = 0;
         this.playerType = type;
         this.playerPiece = new Piece(type);
-        this.playerAccount = new Account(); ;
+        this.playerAccount = new Account();
+        this.canEscape = false;
     }
 
 
@@ -40,8 +42,20 @@ public class Player {
         playerAccount.setTotalBalance(money);
     }
 
-    public void changePiecePosition(int changePosition) {
+    public void setCanEscape(){
+        canEscape = true;
+    }
+    public void setCanNotEscape(){
+        canEscape = false;
+    }
+    public boolean getCanEscape(){
+        return canEscape;
+    }
 
+
+
+
+    public void changePiecePosition(int changePosition) {
     }
 
 }

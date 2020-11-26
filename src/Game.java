@@ -21,7 +21,7 @@ public class Game {
         Field[] field = board.setupField();
         Player[] players = setupPlayers();
 
-        doRule(field[0], players[], property,);
+        doRule(field[0], players[], property,1,0);
 
         }
     private static Player setupPlayer() {
@@ -64,20 +64,64 @@ public class Game {
     }
 
 
-    private static void doRule(Field field, Player[] player, Property property, int active) {
+    private static void doRule(Field field, Player[] player, Property property, int active, int position) {
         Object[] rules = field.getAllRules();
+        boolean[] rulesB = field.getBooleanRules();
         System.out.println("player with piece type " + player[active].getPlayerType() + " is doing rules for " + rules[0].toString());
         System.out.println("description: " + rules[1]);
 
-        if (rules [4]){
-            int owner = property.getOwner();
-            player[active];
 
-            for (int i = 0; i < 3; i++) {
 
+        if (rulesB [1]){
+            int owner = property.getOwner(position);
+            int change = (Integer) rules[14];
+            if (owner == active){
+                return;
             }
-
+            if (owner == 0){
+                player[active].changeMoney((change));
+                property.buy(position,player[active].getPlayerType());
+            }
+            else{
+                player[active].changeMoney(-(change));
+                player[owner].changeMoney(-(change));
+            }
         }
+
+        if (rulesB[2]){
+            if (player[active].getCanEscape()){
+                player[active].setPlayerPiece(6);
+                player[active].setCanNotEscape();
+            }
+            if (!player[active].getCanEscape()){
+                player[active].setPlayerPiece(6);
+                player[active].changeMoney(-1);
+        }
+        if (rulesB[3]){
+            player[active].setPlayerPiece(0);
+        }
+        if (rulesB[4]){
+            player[active].setPlayerPiece(23); //possibly make it so you try to buy the beach
+        }
+        if (rulesB[7] = true){
+            Scanner in = new Scanner(System.in);
+            System.out.println("How many fields do you want to go up?"); //make exceptions!. only 1-5
+            int move = in.nextInt();
+            player[active].movePlayerPiece(move);
+        }
+        if (rulesB[8]){
+            for (int i = 0; i < player.length; i++) {
+                if (i!= active){
+                    player[i].changeMoney(-1);
+                    player[active].changeMoney(1);
+                }
+            }
+        }
+
+
+
+
+
         //this.fieldName = "";
         //this.fieldDescription = "";
         //this.color = "";
