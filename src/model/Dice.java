@@ -4,7 +4,8 @@ public class Dice {
     int diceOutcome;
 
 
-    public int getFaceValue() {
+    public int getDiceOutcome() {
+
         return diceOutcome;
     }
 

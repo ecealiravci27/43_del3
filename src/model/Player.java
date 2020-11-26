@@ -27,6 +27,16 @@ public class Player {
         Account playerAccount = new Account(startingBalance);
     }
 
+    public void movePlayerPiece(int addMove) {
+
+        playerPiece.movePiece(addMove);
+    }
+
+    public int getPieceMoves() {
+
+        return playerPiece.getPieceMoves();
+    }
+
     public void setPlayerPiece(int position){
        playerPiece.setTotalMoves (position);
     }

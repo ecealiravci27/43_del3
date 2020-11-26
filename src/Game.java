@@ -1,18 +1,22 @@
-import model.Board;
-import model.Dice;
-import model.Field;
-import model.Player;
+import model.*;
 
 import java.util.Arrays;
 import java.util.Scanner;
 public class Game {
+
+    Dice dice;
+    Player player;
+    Board board;
+
     Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
-        Player player;
+        //Dice dice;
+        //Player player;
         Board board = new Board();
         Scanner in = new Scanner(System.in);
-        Dice dice = new Dice();
+        //Dice dice = new Dice();
         Field[] fields = board.setupField();
+
         fields[0].getFieldName();
         System.out.println((Arrays.toString(fields[0].getAllRules())));
         int totalPlayers;
@@ -44,10 +48,13 @@ public class Game {
 
     private void doRule() {
 
-        /**
-         * Terningen kastes for spilleren
-         */
+    }
 
+    private void playTurn() {
+
+        dice.rollDice();
+        player.movePlayerPiece(dice.getDiceOutcome());
+        board.getFielobject(player.getPieceMoves());
     }
 
 }

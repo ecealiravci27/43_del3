@@ -6,7 +6,7 @@ public class Piece {
     String[] type = new String[]{"Cat", "Dog", "Boat", "Car"};
 
 
-    private void movePiece(int addMove) {
+    public void movePiece(int addMove) {
 
         this.totalMoves = totalMoves + addMove;
     }

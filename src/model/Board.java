@@ -8,6 +8,11 @@ public class Board {
    }
 
    public Field getFielobject(int id) {
+
+      if (id > 23) {
+         id = id - 23;
+      }
+
       return field[id];
    }
 
