@@ -5,7 +5,7 @@ public class CardPile{
     public int cardIndex;
     Field[] card;
 
-    public CardPile(int cardIndex){
+    public CardPile(){
         this.card = setupCard();
         this.cardIndex = (int) (Math.random()*7);
     }
@@ -27,7 +27,6 @@ public class CardPile{
     public Card drawCard(){
         cardIndex++;
         return (Card) card[cardIndex-1];
-
 
     }
 

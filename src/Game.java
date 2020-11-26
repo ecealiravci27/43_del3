@@ -17,9 +17,9 @@ public class Game {
         //initializing objects. player array needs an input variable so its done later
         Board board = new Board();
         Dice dice = new Dice();
+        CardPile pile = new CardPile();
         Scanner in = new Scanner(System.in);
         Property property = new Property();
-        Field[] field = board.setupField();
         Player[] players = setupPlayers();
 
     }
@@ -32,7 +32,6 @@ public class Game {
     }
 
     public static Player[] setupPlayers() {
-
         Scanner in = new Scanner(System.in);
         System.out.println("How many players?");
         int totalPlayers = in.nextInt();
@@ -64,14 +63,16 @@ public class Game {
     }
 
 
-    public static void doRule(Field field, Player[] player, Property property, int active, int position) {
+
+    public void doRule(Field field,CardPile pile, Player[] player, Property property, int active, int position) {
         Object[] rules = field.getAllRules();
         boolean[] rulesB = field.getBooleanRules();
         System.out.println("player with piece type " + player[active].getPlayerType() + " is doing rules for " + rules[0].toString());
         System.out.println("description: " + rules[1]);
 
-
         if (rulesB[0]) {
+            Card card = pile.drawCard();
+            doCard(card, player, active);
 
         }
         if (rulesB[1]) {
@@ -92,7 +93,7 @@ public class Game {
     }
 
 
-    public static void doCard(Card card, Player[] player, int active, int position) {
+    public static void doCard(Card card, Player[] player, int active) {
         boolean[] rulesB = card.getBooleanRules();
         if (rulesB[2]) {
             if (player[active].getCanEscape()) {
@@ -116,10 +117,28 @@ public class Game {
         if (rulesB[6]) {
             Scanner in = new Scanner(System.in);
             System.out.println("you have to go to a color. 1-2?");
-            position = in.nextInt();
-            card.getColor();
-        }
+            int position = in.nextInt();
+            String color = card.getColor();
+            if (color == "light blue") {
+                System.out.println(color);
+                if (position == 1) {
+                    player[active].setPlayerPiece(4);
+                }
+                if (position == 2) {
+                    player[active].setPlayerPiece(5);
+                }
 
+            }
+            if (color == "green") {
+                System.out.println(color);
+                if (position == 1) {
+                    player[active].setPlayerPiece(19);
+                }
+                if (position == 2) {
+                    player[active].setPlayerPiece(20);
+                }
+            }
+        }
         if (rulesB[7]) {
             Scanner in = new Scanner(System.in);
             System.out.println("How many fields do you want to go up?"); //make exceptions!. only 1-5
