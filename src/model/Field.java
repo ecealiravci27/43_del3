@@ -35,7 +35,7 @@ public abstract class Field {
         this.fieldValue = 0;
     }
 
-    public String getStringtRules(int id){
+    public String[] getStringtRules(){
 
         String stringRule[];
         stringRule = new String[3];
@@ -43,47 +43,29 @@ public abstract class Field {
         stringRule[1]=fieldDescription;
         stringRule[2]=color;
 
-        //return new String[]{fieldName,fieldDescription, color};
+        return new String[]{fieldName,fieldDescription, color};
 
-        return stringRule[id];
     }
-    public boolean getBooleanRules(int id){
+    public boolean[] getBooleanRules(){
         boolean booleanRule[];
-        booleanRule = new boolean[8];
-        booleanRule[0]=drawCard;
-        booleanRule[1]=attemptPurchase;
-        booleanRule[2]=goToJail;
-        booleanRule[3]=goToStart;
-        booleanRule[4]=goToStrandPromade;
-        booleanRule[5]=goToColor;
-        booleanRule[6]=goUpToFive;
-        booleanRule[7]=birthday;
 
-        //return new boolean[]{drawCard,attemptPurchase, goToJail, goToStart, goToStrandPromade, canEscape, goToColor, goUpToFive, birthday};
+        return new boolean[]{drawCard,attemptPurchase, goToJail, goToStart, goToStrandPromade, canEscape, goToColor, goUpToFive, birthday};
 
-        return booleanRule[id];
     }
 
-    public int getIntRules(int id){
+    public int[] getIntRules(){
         int intRule[];
-        intRule = new int[3];
 
-        intRule[0]=changeMoney;
-        intRule[1]=fieldValue;
-        intRule[2]=movePiece;
-
-        //return new int[]{changeMoney,fieldValue, movePiece};
-
-        return intRule[id];
+        return new int[]{changeMoney,fieldValue, movePiece};
     }
 
-    /*public Object[] getAllRules(){
+    public Object[] getAllRules(){
         String[] stringR = getStringtRules();
         boolean[] booleanR = getBooleanRules();
         int[] intR = getIntRules();
 
         return new Object[]{stringR[0],stringR[1],stringR[2],booleanR[0],booleanR[1],booleanR[2],booleanR[3],booleanR[4],booleanR[5],booleanR[6],booleanR[7], booleanR[8], intR[0],intR[1], intR[2]};
-    }*/
+    }
 
     public String getFieldName(){
         return fieldName;
