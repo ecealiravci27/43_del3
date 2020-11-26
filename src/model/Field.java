@@ -74,4 +74,6 @@ public abstract class Field {
     public String getFieldDescription() {
         return fieldDescription;
     }
+
+    public String getColor() {return color;}
 }

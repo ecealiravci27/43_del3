@@ -9,6 +9,7 @@ public class Game {
     Board board;
 
     Scanner in = new Scanner(System.in);
+
     public static void main(String[] args) {
 
         //initializing variables
@@ -21,9 +22,8 @@ public class Game {
         Field[] field = board.setupField();
         Player[] players = setupPlayers();
 
-        doRule(field[0], players[], property,1,0);
+    }
 
-        }
     private static Player setupPlayer() {
         Scanner in = new Scanner(System.in);
         System.out.println("hvilken brik vil du have? 1-4?");
@@ -48,7 +48,7 @@ public class Game {
                 System.out.println(players[j].getPlayerType());
             }
         }
-        for (int i = 0; i <totalPlayers ; i++) {
+        for (int i = 0; i < totalPlayers; i++) {
             int startingBalance = 0;
             if (totalPlayers == 2) {
                 startingBalance = 20;
@@ -64,90 +64,100 @@ public class Game {
     }
 
 
-    private static void doRule(Field field, Player[] player, Property property, int active, int position) {
+    public static void doRule(Field field, Player[] player, Property property, int active, int position) {
         Object[] rules = field.getAllRules();
         boolean[] rulesB = field.getBooleanRules();
         System.out.println("player with piece type " + player[active].getPlayerType() + " is doing rules for " + rules[0].toString());
         System.out.println("description: " + rules[1]);
 
 
+        if (rulesB[0]) {
 
-        if (rulesB [1]){
+        }
+        if (rulesB[1]) {
             int owner = property.getOwner(position);
             int change = (Integer) rules[14];
-            if (owner == active){
+            if (owner == active) {
                 return;
             }
-            if (owner == 0){
+            if (owner == 0) {
                 player[active].changeMoney((change));
-                property.buy(position,player[active].getPlayerType());
-            }
-            else{
+                property.buy(position, player[active].getPlayerType());
+            } else {
                 player[active].changeMoney(-(change));
                 player[owner].changeMoney(-(change));
             }
-        }
 
-        if (rulesB[2]){
-            if (player[active].getCanEscape()){
+        }
+    }
+
+
+    public static void doCard(Card card, Player[] player, int active, int position) {
+        boolean[] rulesB = card.getBooleanRules();
+        if (rulesB[2]) {
+            if (player[active].getCanEscape()) {
                 player[active].setPlayerPiece(6);
                 player[active].setCanNotEscape();
             }
-            if (!player[active].getCanEscape()){
+            if (!player[active].getCanEscape()) {
                 player[active].setPlayerPiece(6);
                 player[active].changeMoney(-1);
+            }
         }
-        if (rulesB[3]){
+
+        if (rulesB[3]) {
             player[active].setPlayerPiece(0);
         }
-        if (rulesB[4]){
+
+        if (rulesB[4]) {
             player[active].setPlayerPiece(23); //possibly make it so you try to buy the beach
         }
-        if (rulesB[7] = true){
+
+        if (rulesB[6]) {
+            Scanner in = new Scanner(System.in);
+            System.out.println("you have to go to a color. 1-2?");
+            position = in.nextInt();
+            card.getColor();
+        }
+
+        if (rulesB[7]) {
             Scanner in = new Scanner(System.in);
             System.out.println("How many fields do you want to go up?"); //make exceptions!. only 1-5
             int move = in.nextInt();
             player[active].movePlayerPiece(move);
         }
-        if (rulesB[8]){
+
+        if (rulesB[8]) {
             for (int i = 0; i < player.length; i++) {
-                if (i!= active){
+                if (i != active) {
                     player[i].changeMoney(-1);
                     player[active].changeMoney(1);
                 }
             }
         }
-
-
-
-
-
-        //this.fieldName = "";
-        //this.fieldDescription = "";
-        //this.color = "";
-        //this.drawCard = false;
-        //this.attemptPurchase = false;
-        //this.goToJail = false;
-        //this.goToStart = false;
-        //this.goToStrandPromade = false;
-        //this.canEscape = false;
-        //this.goToColor = false;
-        //this.goUpToFive = false;
-        //this.birthday = false;
-        //this.movePiece = 0;
-        //this.changeMoney = 0;
-        //this.fieldValue = 0;
-
-
     }
 
-    private void playTurn() {
 
+    //this.fieldName = "";
+    //this.fieldDescription = "";
+    //this.color = "";
+    //this.drawCard = false;
+    //this.attemptPurchase = false;
+    //this.goToJail = false;
+    //this.goToStart = false;
+    //this.goToStrandPromade = false;
+    //this.canEscape = false;
+    //this.goToColor = false;
+    //this.goUpToFive = false;
+    //this.birthday = false;
+    //this.movePiece = 0;
+    //this.changeMoney = 0;
+    //this.fieldValue = 0;
+
+    private void playTurn() {
         dice.rollDice();
         player.movePlayerPiece(dice.getDiceOutcome());
         board.getFielobject(player.getPieceMoves());
     }
-
-
 
 }

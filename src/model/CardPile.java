@@ -1,9 +1,13 @@
 package model;
 
 public class CardPile{
+
+    public int cardIndex;
     Field[] card;
-    public CardPile(){
+
+    public CardPile(int cardIndex){
         this.card = setupCard();
+        this.cardIndex = (int) (Math.random()*7);
     }
 
 
@@ -18,6 +22,13 @@ public class CardPile{
         card[6] = new Card(false,false, false, false, false,false, -2,0, "");
         card[7] = new Card(false,false, true, false, false,false, 0,0,"");
         return card;
+    }
+
+    public Card drawCard(){
+        cardIndex++;
+        return (Card) card[cardIndex-1];
+
+
     }
 
 
