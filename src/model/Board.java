@@ -9,8 +9,8 @@ public class Board {
 
    public Field getFielobject(int id) {
 
-      if (id > 23) {
-         id = id - 23;
+      while (id > 23) {
+         id = id - 24;
       }
 
       return field[id];
@@ -41,6 +41,7 @@ public class Board {
       field[20] = new PropertyField("Zoo", "monkeys :D", "green", 4);
       field[21] = new ChanceField();
       field[22] = new PropertyField("Vandlandet", "swosh", "blue", 5);
+      field[23] = new PropertyField("Strandpromaden", "flot vejr","blue",5);
 
       return field;
    }
