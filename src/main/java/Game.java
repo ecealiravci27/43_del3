@@ -13,8 +13,7 @@ import java.awt.*;
 import java.util.Scanner;
 public class Game {
     Scanner in = new Scanner(System.in);
-
-    public static void main(String[] args) {
+    public void Start() {
 
         //loads board
         Board board = new Board();
@@ -35,23 +34,36 @@ public class Game {
         totalPlayers = in.nextInt();
         //initializing player object array
         Player[] players = new Player[totalPlayers];
+        GUI_Player[] guiPlayers = new GUI_Player[totalPlayers];
 
         for (int j = 0; j < totalPlayers; j++) {
             if (j == 0) {
                 System.out.println("The youngest starts");
                 players[j] = setupPlayer(totalPlayers, gui);
+                guiPlayers[j] = setupGuiPlayer(players[j], gui);
                 System.out.println(players[j].getPlayerType());
             }
             if (j >= 1) {
                 players[j] = setupPlayer(totalPlayers, gui);
+                guiPlayers[j] = setupGuiPlayer(players[j], gui);
                 System.out.println(players[j].getPlayerType());
             }
         }
 
+        while (totalPlayers >= 1) {
+            for(int i = 0; i < players.length; i++) {
+                String answer = gui.getUserButtonPressed("Your turn: ", "Roll");
+                if (answer.equals("Roll")) {
+                    int maxEye = 6;
+                    int minEye = 1;
+                    int diceOutcome = (int) ((Math.random() * maxEye) + minEye);
+                    roll(diceOutcome, gui, guiPlayers[i], players[i]);
+                }
+            }
+        }
     }
 
-
-    public static Dice roll(int eyes, GUI gui, GUI_Player guiPlayer, Player player) {
+    public Dice roll(int eyes, GUI gui, GUI_Player guiPlayer, Player player) {
         Dice dice = new Dice();
         dice.rollDice();
         dice.setDiceOutcome(eyes);
@@ -62,13 +74,18 @@ public class Game {
         gui.getFields()[player.getPosition()].setCar(guiPlayer, false);
 
         // Move position for piece
-        gui.getFields()[eyes].setCar(guiPlayer, true);
-        player.setPosition(eyes);
+        int newpos = eyes+player.getPosition();
+
+        if (newpos > 23) {
+            newpos = newpos - 24;
+        }
+
+        gui.getFields()[newpos].setCar(guiPlayer, true);
+        player.setPosition(newpos);
         return dice;
     }
 
-
-    public static Player setupPlayer(int playerAmount, GUI gui) {
+    public Player setupPlayer(int playerAmount, GUI gui) {
         Scanner in = new Scanner(System.in);
         System.out.println("Select piece by entering a number (1 = Tractor, 2 = Racecar, 3 = UFO, 4 = Car");
         int type = in.nextInt();
@@ -80,7 +97,12 @@ public class Game {
         player.setPlayername(name);
 
         //allows user to select between 4 pieces
+        return player;
+    }
+
+    public GUI_Player setupGuiPlayer(Player player, GUI gui) {
         GUI_Car.Type carType;
+        int type = player.getPlayerType();
         switch (type) {
             case 1:
                 carType = GUI_Car.Type.TRACTOR;
@@ -103,17 +125,11 @@ public class Game {
         GUI_Player guiPlayer = new GUI_Player(player.getPlayername(), player.getPlayerAccount().getTotalBalance(), guiCar);
 
         gui.addPlayer(guiPlayer);
-
+        //gui.addPlayer(guiPlayer);
 
         GUI_Field field = gui.getFields()[0];
         field.setCar(guiPlayer, true);
 
-        String answer = gui.getUserButtonPressed("Your turn: ", "Roll");
-
-        if (answer.equals("Roll")) {
-            roll(2, gui, guiPlayer, player);
-        }
-
-        return player;
+        return guiPlayer;
     }
 }
