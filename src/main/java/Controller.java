@@ -24,7 +24,7 @@ public class Controller {
         CardPile pile = new CardPile();
         Scanner in = new Scanner(System.in);
         Property property = new Property();
-        System.out.println("How many players?");
+        System.out.println("How many players? (Minimum: 2 | Maximum: 4)");
         int totalPlayers = in.nextInt();
         Player[] player = setupPlayers(totalPlayers);
         GUI_Player[] guiPlayers = new GUI_Player[totalPlayers];
@@ -61,8 +61,8 @@ public class Controller {
                         name = player[i].getPlayername();
                     }
                 }
-                gui.showMessage("Winner is: " + name + " with total money: " + max);
-                System.out.println("game over");
+                gui.showMessage("Winner is: " + name + " with total of: " + max + " M");
+                System.out.println("Game over!");
                 break;
             }
 
@@ -100,7 +100,7 @@ public class Controller {
 
         GUI_Car guiCar = new GUI_Car(null, null, carType, GUI_Car.Pattern.FILL);
         Scanner in = new Scanner(System.in);
-        System.out.println("write player name for "+ player.getPlayerType());
+        System.out.println("Write player name for 'Player "+ player.getPlayerType()+"'");
         String name = in.nextLine();
         player.setPlayername(name);
         GUI_Player guiPlayer = new GUI_Player(name, player.getMoney(), guiCar);
@@ -118,7 +118,7 @@ public class Controller {
         Player[] players = new Player[totalPlayers];
         for (int j = 0; j < totalPlayers; j++) {
             if (j == 0) {
-                System.out.println("The youngest starts");
+                System.out.println("The youngest player starts: ");
                 players[j] = setupPlayer();
             }
             if (j >= 1) {
@@ -152,8 +152,8 @@ public class Controller {
         Object[] rules = field.getAllRules();
         boolean[] rulesB = field.getBooleanRules();
         int[] rulesI = field.getIntRules();
-        System.out.println("player with piece type " + player[active].getPlayerType() + " is doing rules for " + rules[0].toString());
-        System.out.println("description: " + rules[1]);
+        System.out.println("Player with piece type " + player[active].getPlayerType() + " is doing rules for " + rules[0].toString());
+        System.out.println("Field description: " + rules[1]);
 
 
         //Active player draws a card
@@ -168,7 +168,7 @@ public class Controller {
             int change = rulesI[2];
 
             if (owner == 5) {
-                System.out.println("charging: " + change);
+                System.out.println("Charging: " + change);
                 player[active].changeMoney(-(change));
                 gplayer.setBalance(player[active].getMoney());
                 property.buy(position, active);
@@ -221,10 +221,10 @@ public class Controller {
         //Active player moves to a field of a particular color, chooses
         if (rulesB[6]) {
             Scanner in = new Scanner(System.in);
-            System.out.println("you have to go to a color. 1-2?");
+            System.out.println("You have to move to a color (1 for first color, 2 for second color)");
             int position = in.nextInt();
             String color = card.getColor();
-            if (color.equals("light blue")) {
+            if (color.equals("Moved to a light blue field.")) {
                 System.out.println(color);
                 if (position == 1) {
                     player[active].setPosition(4);
@@ -236,7 +236,7 @@ public class Controller {
                 }
 
             }
-            if (color.equals("green")) {
+            if (color.equals("Moved to a green field.")) {
                 System.out.println(color);
                 if (position == 1) {
                     player[active].setPosition(19);
@@ -252,7 +252,7 @@ public class Controller {
         //Active player chooses to move 1-5 fields
         if (rulesB[7]) {
             Scanner in = new Scanner(System.in);
-            System.out.println("How many fields do you want to go up?"); //make exceptions!. only 1-5
+            System.out.println("How many fields do you want to go up? (Choose between 1-5)"); //make exceptions!. only 1-5
             int move = in.nextInt();
             player[active].movePlayerPiece(move);
             setGuiposition(gui, prevposition, gplayer, player[active].getPosition());
