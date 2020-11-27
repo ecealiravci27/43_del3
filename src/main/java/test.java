@@ -55,4 +55,28 @@ public class test {
         int owner = property.getOwner(position);
         assertEquals(3, owner);
     }
+
+    @Test
+    public void payRent() {
+        Player player = new Player(3);
+        Property property = new Property();
+        player.setPosition(20);
+        int position = (player.getPlayerPosition());
+        property.buy(position, player.getPlayerType());
+        int owner = property.getOwner(position);
+        assertEquals(3, owner);
+
+        Player prent = new Player(2);
+
+        Board board = new Board();
+        int[] rulesI = board.getField(position).getIntRules();
+        int change = rulesI[2];
+        prent.setMoney(7);
+
+        prent.changeMoney((-change));
+        player.changeMoney(change);
+
+        assertEquals(3, prent.getMoney());
+        assertEquals(5, player.getMoney());
+    }
 }
