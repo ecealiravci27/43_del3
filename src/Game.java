@@ -104,6 +104,17 @@ public class Game {
                 player[owner].changeMoney((change));
             }
 
+            if (rulesB[2]) {
+                if (player[active].getCanEscape()) {
+                    player[active].setPlayerPiece(6);
+                    player[active].setCanNotEscape();
+                }
+                if (!player[active].getCanEscape()) {
+                    player[active].setPlayerPiece(6);
+                    player[active].changeMoney(-1);
+                }
+            }
+
         }
     }
     //Rules for when drawing a card
@@ -112,16 +123,9 @@ public class Game {
         boolean[] rulesB = card.getBooleanRules();
         int[] rulesI = card.getIntRules();
 
-        //Active player landed on goToJail field, (not a card effect, needs fix)
-        if (rulesB[2]) {
-            if (player[active].getCanEscape()) {
-                player[active].setPlayerPiece(6);
-                player[active].setCanNotEscape();
-            }
-            if (!player[active].getCanEscape()) {
-                player[active].setPlayerPiece(6);
-                player[active].changeMoney(-1);
-            }
+        //Active player gets a canEscape effect activated
+        if (rulesB[5]) {
+            player[active].setCanEscape();
         }
 
         //Active player moves to field 0, start field
