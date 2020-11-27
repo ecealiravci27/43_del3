@@ -2,12 +2,12 @@ package model;
 
 public class CardPile{
 
-    public int cardIndex;
+    public static int cardIndex;
     Field[] card;
 
     public CardPile(){
         this.card = setupCard();
-        this.cardIndex = (int) (Math.random()*7);
+        cardIndex = (int) (Math.random()*7);
     }
 
     public Field[] setupCard() {
