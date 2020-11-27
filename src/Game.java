@@ -9,9 +9,7 @@ public class Game {
     Board board;
 
     Scanner in = new Scanner(System.in);
-
     public static void main(String[] args) {
-
         //initializing variables
 
         //initializing objects. player array needs an input variable so its done later
@@ -26,9 +24,9 @@ public class Game {
         while (!checkBancrupcy(player)) {
             playerturn = playerturn%(player.length);
             System.out.println(playerturn);
-            player[playerturn].movePlayerPiece(dice.rollDice());
             int position = (player[playerturn].getPieceMoves())%23;
             System.out.println(position);
+            movePlayer(player[playerturn]);
             doRule(board.getField(position), pile, player, property, playerturn);
 
             if(player[playerturn].getMoney() == 0){
@@ -192,7 +190,8 @@ public class Game {
     }
 
     public static void movePlayer(Player player) {
-
+        Dice dice = new Dice();
+        player.changeMoney(dice.rollDice());
     }
 
     public static boolean checkBancrupcy (Player[] player) {
@@ -204,8 +203,4 @@ public class Game {
         return false;
     }
 
-    private Field getField(Player[] player,int active) {
-
-        return board.getFielobject(player[active].getPieceMoves());
-    }
 }
