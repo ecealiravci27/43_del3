@@ -1,4 +1,4 @@
-package model;
+package Model;
 public class PropertyField extends Field {
 
     public PropertyField(String fieldName, String fieldDescription, String color, int fieldValue){

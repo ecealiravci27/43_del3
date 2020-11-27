@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 public class Card extends Field {
     public Card(boolean goToStart,boolean goToColor, boolean goToStrandPromade, boolean canEscape, boolean goUpToFive, boolean birthday, int changeMoney, int movePiece, String color){
