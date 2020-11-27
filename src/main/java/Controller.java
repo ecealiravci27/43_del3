@@ -1,3 +1,6 @@
+import gui_fields.GUI_Car;
+import gui_fields.GUI_Field;
+import gui_fields.GUI_Player;
 import gui_main.GUI;
 import model.*;
 
@@ -9,24 +12,32 @@ public class Controller {
     Player player;
 
 
-    //loads guiboard
-    GuiBoard guiBoard = new GuiBoard();
-    GUI gui = new GUI(guiBoard.setupField(), Color.white);
-
-    //logic board
-    Board board = new Board();
-
     Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
         //initializing variables
 
         //initializing objects. player array needs an input variable so its done later
+
+        //loads guiboard
+        GuiBoard guiBoard = new GuiBoard();
+        GUI gui = new GUI(guiBoard.setupField(), Color.white);
+
+
         Board board = new Board();
         Dice dice = new Dice();
         CardPile pile = new CardPile();
         Scanner in = new Scanner(System.in);
         Property property = new Property();
-        Player[] player = setupPlayers();
+        System.out.println("How many players?");
+        int totalPlayers = in.nextInt();
+        Player[] player = setupPlayers(totalPlayers);
+
+        for (int i = 0; i < player.length; i++) {
+            setupGuiPiece(player[i], gui);
+        }
+
+
+
         int playerturn = 0;
 
         while (!checkBancrupcy(player)) {
@@ -45,18 +56,51 @@ public class Controller {
         }
     }
 
-
     private static Player setupPlayer() {
         Scanner in = new Scanner(System.in);
-        System.out.println("What piece do you want? 1-4?");
+        System.out.println("Select piece by entering a number (1 = Tractor, 2 = Racecar, 3 = UFO, 4 = Car");
         int type = in.nextInt();
         return new Player(type);
     }
 
-    public static Player[] setupPlayers() {
+    public static void setupGuiPiece(Player player, GUI gui) {
+        GUI_Car.Type carType;
+        int type = player.getPlayerType();
+        switch (type) {
+            case 1:
+                carType = GUI_Car.Type.TRACTOR;
+                break;
+            case 2:
+                carType = GUI_Car.Type.RACECAR;
+                break;
+            case 3:
+                carType = GUI_Car.Type.UFO;
+                break;
+            case 4:
+                carType = GUI_Car.Type.CAR;
+                break;
+            default:
+                carType = GUI_Car.Type.CAR;
+        }
+
+        GUI_Car guiCar = new GUI_Car(null, null, carType, GUI_Car.Pattern.FILL);
+
         Scanner in = new Scanner(System.in);
-        System.out.println("How many players?");
-        int totalPlayers = in.nextInt();
+        System.out.println("write player name for"+ player.getPlayerType());
+        String name = in.nextLine();
+
+        GUI_Player guiPlayer = new GUI_Player(name, player.getMoney(), guiCar);
+
+        gui.addPlayer(guiPlayer);
+        //gui.addPlayer(guiPlayer);
+
+        GUI_Field field = gui.getFields()[0];
+        field.setCar(guiPlayer, true);
+    }
+
+
+    public static Player[] setupPlayers(int totalPlayers) {
+
         Player[] players = new Player[totalPlayers];
         for (int j = 0; j < totalPlayers; j++) {
             if (j == 0) {
@@ -78,9 +122,9 @@ public class Controller {
             }
             players[i].setMoney(startingBalance);
         }
-
         return players;
     }
+
 
 
     //Method for rules when landing on a field
@@ -153,7 +197,7 @@ public class Controller {
             System.out.println("you have to go to a color. 1-2?");
             int position = in.nextInt();
             String color = card.getColor();
-            if (color == "light blue") {
+            if (color.equals("light blue")) {
                 System.out.println(color);
                 if (position == 1) {
                     player[active].setPlayerPiece(4);
@@ -163,7 +207,7 @@ public class Controller {
                 }
 
             }
-            if (color == "green") {
+            if (color.equals("green")) {
                 System.out.println(color);
                 if (position == 1) {
                     player[active].setPlayerPiece(19);
@@ -206,4 +250,15 @@ public class Controller {
         }
         return false;
     }
+
+    public void setGuiposition (GUI gui, int position, GUI_Player guiPlayer, int move) {
+        gui.getFields()[move].setCar(guiPlayer, true);
+        gui.getFields()[position].setCar(guiPlayer, false);
+
+
+    }
+
+
+
+
 }
