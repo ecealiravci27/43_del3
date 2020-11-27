@@ -8,26 +8,29 @@ public class Player {
     Property playerProperty;
     int playerPosition;
     int playerType;
-
-    public void setupAccount(int totalPlayers) {
-        int startingBalance = 0;
-        if (totalPlayers == 2) {
-            startingBalance = 20;
-        } else if (totalPlayers == 3) {
-            startingBalance = 18;
-        } else if (totalPlayers == 4) {
-            startingBalance = 16;
-        }
-
-        playerAccount = new Account(startingBalance);
-
-    }
+    boolean canEscape;
 
     public Player(int type) {
         this.playerPosition = 0;
         this.playerType = type;
+        this.playerPiece = new Piece(type);
+        this.playerPosition = 0;
+        this.playerAccount = new Account();
+        this.canEscape = false;
     }
 
+    public void movePlayerPiece(int addMove) {
+        playerPiece.movePiece(addMove);
+        playerPosition = playerPiece.getPieceMoves()%23;
+    }
+
+    public int getPieceMoves() {
+        return playerPiece.getPieceMoves();
+    }
+
+    public void setPlayerPiece(int position){
+       playerPiece.setTotalMoves (position);
+    }
     public int getPosition(){
         return playerPosition;
     }
@@ -40,16 +43,30 @@ public class Player {
         return playerType;
     }
 
-    public void setupProperty() {
-
+    public void changeMoney(int money){
+        playerAccount.changeTotalBalance(money);
+    }
+    public void setMoney(int money){
+        playerAccount.setTotalBalance(money);
     }
 
-    public void changePiecePosition(int changePosition) {
-
+    public void setCanEscape(){
+        canEscape = true;
     }
-
-    public void purchaseProperty(String field){
-
+    public void setCanNotEscape(){
+        canEscape = false;
+    }
+    public boolean getCanEscape(){
+        return canEscape;
+    }
+    public int getPlayerPosition() {
+        return playerPosition;
+    }
+    public boolean isBancrupt(){
+        return playerAccount.isBancrupt();
+    }
+    public int getMoney(){
+        return playerAccount.getTotalBalance();
     }
 
     public void setPlayername(String name) {

@@ -1,22 +1,27 @@
 package Model;
 
-import java.util.ArrayList;
-
 public class Piece {
     String pieceType;
     int totalMoves;
     String[] type = new String[]{"Cat", "Dog", "Boat", "Car"};
 
-
-    private void movePiece(int addMove) {
-        this.totalMoves = addMove;
+    public Piece(int playertype){
+        this.totalMoves = 0;
+        this.pieceType = type[playertype - 1];
     }
 
-    private void setPieceType(int a) {
-        this.pieceType = type[a];
+    public void movePiece(int addMove) {
+        totalMoves = totalMoves + addMove;
     }
 
-    private int getPieceMoves() {
+    public void setTotalMoves(int position){
+        totalMoves = position;
+    }
+
+    public int getPieceMoves() {
         return totalMoves;
+    }
+    public String getPieceType(){
+        return pieceType;
     }
 }

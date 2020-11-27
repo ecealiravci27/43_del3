@@ -1,18 +1,13 @@
 package Model;
-import Model.Player;
 
 public class Account {
 
         private int totalBalance;
-        private int balanceToBankruptcy;
+        private final int balanceToBankruptcy;
 
-        public Account(int balance){
-            this.totalBalance = balance;
+        public Account(){
+            this.totalBalance = 1;
             this.balanceToBankruptcy = 0;
-        }
-
-        public void setStartingBalace(int playerAmount){
-
         }
 
         public void changeTotalBalance(int change){
@@ -20,6 +15,18 @@ public class Account {
 
             if (totalBalance < 0) {
                 totalBalance = 0;
+            }
+        }
+
+        public void setTotalBalance(int money){
+            totalBalance = money;
+        }
+        public boolean isBancrupt(){
+            if (totalBalance == balanceToBankruptcy){
+                return true;
+            }
+            else{
+                return false;
             }
         }
 
