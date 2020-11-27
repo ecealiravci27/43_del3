@@ -24,7 +24,7 @@ public class Controller {
         CardPile pile = new CardPile();
         Scanner in = new Scanner(System.in);
         Property property = new Property();
-        System.out.println("How many players? (Minimum: 2 | Maximum: 4)");
+        System.out.println("How many players? (2-4 of players allowed)");
         int totalPlayers = in.nextInt();
         Player[] player = setupPlayers(totalPlayers);
         GUI_Player[] guiPlayers = new GUI_Player[totalPlayers];
