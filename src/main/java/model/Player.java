@@ -36,6 +36,7 @@ public class Player {
     }
 
     public void setPosition(int playerPosition) {
+        playerPiece.setTotalMoves(playerPosition);
         this.playerPosition = playerPosition;
     }
 

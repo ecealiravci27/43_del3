@@ -51,7 +51,7 @@ public class Controller {
 
             setGuiposition(gui, position, guiPlayers[playerturn], player[playerturn].getPosition());
 
-            doRule(board.getField(position), pile, player, property, playerturn);
+            doRule(board.getField(position), pile, player, property, playerturn, gui, guiPlayers[playerturn]);
             if(player[playerturn].getMoney() == 0){
                 System.out.println("game over");
                 break;
@@ -152,7 +152,7 @@ public class Controller {
 }
 
     //Method for rules when landing on a field
-    public static void doRule(Field field,CardPile pile, Player[] player, Property property, int active) {
+    public static void doRule(Field field,CardPile pile, Player[] player, Property property, int active, GUI gui, GUI_Player gplayer) {
         int position = player[active].getPlayerPosition();
         Object[] rules = field.getAllRules();
         boolean[] rulesB = field.getBooleanRules();
@@ -164,7 +164,7 @@ public class Controller {
         //Active player draws a card
         if (rulesB[0]) {
             Card card = pile.drawCard();
-            doCard(card, player, active);
+            doCard(card, player, active, gui, gplayer);
         }
 
         //The field is a property field, rules for a property fied commence
@@ -182,11 +182,11 @@ public class Controller {
 
             if (rulesB[2]) {
                 if (player[active].getCanEscape()) {
-                    player[active].setPlayerPiece(6);
+                    player[active].setPosition(6);
                     player[active].setCanNotEscape();
                 }
                 if (!player[active].getCanEscape()) {
-                    player[active].setPlayerPiece(6);
+                    player[active].setPosition(6);
                     player[active].changeMoney(-1);
                 }
             }
@@ -195,10 +195,10 @@ public class Controller {
     }
     //Rules for when drawing a card
     //Missing rule for "pay 2M to the bank"
-    public static void doCard(Card card, Player[] player, int active) {
+    public static void doCard(Card card, Player[] player, int active, GUI gui, GUI_Player gplayer) {
         boolean[] rulesB = card.getBooleanRules();
         int[] rulesI = card.getIntRules();
-
+        int prevposition = (player[active].getPlayerPosition());
         //Active player gets a canEscape effect activated
         if (rulesB[5]) {
             player[active].setCanEscape();
@@ -206,12 +206,14 @@ public class Controller {
 
         //Active player moves to field 0, start field
         if (rulesB[3]) {
-            player[active].setPlayerPiece(0);
+            player[active].setPosition(0);
+            setGuiposition(gui, prevposition, gplayer, player[active].getPosition());
         }
 
         //Active player moves to field 23
         if (rulesB[4]) {
-            player[active].setPlayerPiece(23); //possibly make it so you try to buy the beach
+            player[active].setPosition(23); //possibly make it so you try to buy the beach
+            setGuiposition(gui, prevposition, gplayer, player[active].getPosition());
         }
 
 
@@ -224,20 +226,24 @@ public class Controller {
             if (color.equals("light blue")) {
                 System.out.println(color);
                 if (position == 1) {
-                    player[active].setPlayerPiece(4);
+                    player[active].setPosition(4);
+                    setGuiposition(gui, prevposition, gplayer, player[active].getPosition());
                 }
                 if (position == 2) {
-                    player[active].setPlayerPiece(5);
+                    player[active].setPosition(5);
+                    setGuiposition(gui, prevposition, gplayer, player[active].getPosition());
                 }
 
             }
             if (color.equals("green")) {
                 System.out.println(color);
                 if (position == 1) {
-                    player[active].setPlayerPiece(19);
+                    player[active].setPosition(19);
+                    setGuiposition(gui, prevposition, gplayer, player[active].getPosition());
                 }
                 if (position == 2) {
-                    player[active].setPlayerPiece(20);
+                    player[active].setPosition(20);
+                    setGuiposition(gui, prevposition, gplayer, player[active].getPosition());
                 }
             }
         }
@@ -248,6 +254,7 @@ public class Controller {
             System.out.println("How many fields do you want to go up?"); //make exceptions!. only 1-5
             int move = in.nextInt();
             player[active].movePlayerPiece(move);
+            setGuiposition(gui, prevposition, gplayer, player[active].getPosition());
         }
 
         //Birthday. Every other player gives activeplayer 1M
