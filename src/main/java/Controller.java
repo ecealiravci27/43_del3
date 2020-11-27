@@ -10,8 +10,6 @@ public class Controller {
 
     Dice dice;
     Player player;
-
-
     Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
         //initializing variables
@@ -21,8 +19,6 @@ public class Controller {
         //loads guiboard
         GuiBoard guiBoard = new GuiBoard();
         GUI gui = new GUI(guiBoard.setupField(), Color.white);
-
-
         Board board = new Board();
         Dice dice = new Dice();
         CardPile pile = new CardPile();
@@ -31,27 +27,39 @@ public class Controller {
         System.out.println("How many players?");
         int totalPlayers = in.nextInt();
         Player[] player = setupPlayers(totalPlayers);
-
+        GUI_Player[] guiPlayers = new GUI_Player[totalPlayers];
         for (int i = 0; i < player.length; i++) {
-            setupGuiPiece(player[i], gui);
+            setupGuiPlayer(player[i], gui);
         }
 
-
-
         int playerturn = 0;
-
         while (!checkBancrupcy(player)) {
             playerturn = playerturn%(player.length);
             System.out.println(playerturn);
             int position = (player[playerturn].getPlayerPosition());
             int account = player[playerturn].getMoney();
             System.out.println(account);
-            player[playerturn].movePlayerPiece(dice.rollDice());
+
+            ///gui rooldice
+            String answer = gui.getUserButtonPressed("Your turn: ", "Roll");
+            int eyes = dice.rollDice();
+            dice.rememberDice(eyes);
+            guiRoll(gui, dice);
+            player[playerturn].movePlayerPiece(dice.getRememberDice());
+            //guimovepiece
+
+            setGuiposition(gui, position, guiPlayers[playerturn], dice.getRememberDice());
+
             doRule(board.getField(position), pile, player, property, playerturn);
             if(player[playerturn].getMoney() == 0){
                 System.out.println("game over");
                 break;
             }
+
+
+
+
+
             playerturn++;
         }
     }
@@ -63,7 +71,7 @@ public class Controller {
         return new Player(type);
     }
 
-    public static void setupGuiPiece(Player player, GUI gui) {
+    public static GUI_Player setupGuiPlayer(Player player, GUI gui) {
         GUI_Car.Type carType;
         int type = player.getPlayerType();
         switch (type) {
@@ -84,18 +92,15 @@ public class Controller {
         }
 
         GUI_Car guiCar = new GUI_Car(null, null, carType, GUI_Car.Pattern.FILL);
-
         Scanner in = new Scanner(System.in);
         System.out.println("write player name for"+ player.getPlayerType());
         String name = in.nextLine();
-
         GUI_Player guiPlayer = new GUI_Player(name, player.getMoney(), guiCar);
-
         gui.addPlayer(guiPlayer);
         //gui.addPlayer(guiPlayer);
-
         GUI_Field field = gui.getFields()[0];
         field.setCar(guiPlayer, true);
+        return guiPlayer;
     }
 
 
@@ -125,7 +130,27 @@ public class Controller {
         return players;
     }
 
+    public  GUI_Player[] setupGuiPlayers(int totalPlayers, GUI gui, Player[] player){
+        GUI_Player[] guiPlayer = new GUI_Player[totalPlayers];
+        for (int j = 0; j < totalPlayers; j++) {
+            if (j == 0) {
+                System.out.println("The youngest starts");
+                guiPlayer[j] = setupGuiPlayer(player[j], gui);
+            }
+            if (j >= 1) {
+                guiPlayer[j] = setupGuiPlayer(player[j], gui);
+            }
+        }
+        return guiPlayer;
+    }
 
+
+
+    //dice
+    public static void guiRoll (GUI gui, Dice dice) {
+        int eyes = dice.getRememberDice();
+        gui.setDie(eyes);
+}
 
     //Method for rules when landing on a field
     public static void doRule(Field field,CardPile pile, Player[] player, Property property, int active) {
@@ -251,10 +276,9 @@ public class Controller {
         return false;
     }
 
-    public void setGuiposition (GUI gui, int position, GUI_Player guiPlayer, int move) {
+    public static void setGuiposition(GUI gui, int position, GUI_Player guiPlayer, int move) {
         gui.getFields()[move].setCar(guiPlayer, true);
         gui.getFields()[position].setCar(guiPlayer, false);
-
 
     }
 

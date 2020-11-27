@@ -64,7 +64,7 @@ public class Game {
         Dice dice = new Dice();
         dice.rollDice();
         int eyes = dice.rollDice();
-        dice.setDiceOutcome(eyes);
+       // dice.setDiceOutcome(eyes);
         gui.setDie(eyes);
         System.out.println(player.getPosition());
 
