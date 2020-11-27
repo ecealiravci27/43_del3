@@ -29,36 +29,33 @@ public class Controller {
         Player[] player = setupPlayers(totalPlayers);
         GUI_Player[] guiPlayers = new GUI_Player[totalPlayers];
         for (int i = 0; i < player.length; i++) {
-            setupGuiPlayer(player[i], gui);
+            guiPlayers[i] = setupGuiPlayer(player[i], gui);
         }
 
         int playerturn = 0;
+
+        System.out.println(player[0].getPlayerType());
         while (!checkBancrupcy(player)) {
             playerturn = playerturn%(player.length);
-            System.out.println(playerturn);
             int position = (player[playerturn].getPlayerPosition());
             int account = player[playerturn].getMoney();
             System.out.println(account);
 
             ///gui rooldice
-            String answer = gui.getUserButtonPressed("Your turn: ", "Roll");
+            String answer = gui.getUserButtonPressed(player[playerturn].getPlayername()+" turn: ", "Roll");
             int eyes = dice.rollDice();
             dice.rememberDice(eyes);
             guiRoll(gui, dice);
             player[playerturn].movePlayerPiece(dice.getRememberDice());
             //guimovepiece
 
-            setGuiposition(gui, position, guiPlayers[playerturn], dice.getRememberDice());
+            setGuiposition(gui, position, guiPlayers[playerturn], player[playerturn].getPosition());
 
             doRule(board.getField(position), pile, player, property, playerturn);
             if(player[playerturn].getMoney() == 0){
                 System.out.println("game over");
                 break;
             }
-
-
-
-
 
             playerturn++;
         }
@@ -93,13 +90,15 @@ public class Controller {
 
         GUI_Car guiCar = new GUI_Car(null, null, carType, GUI_Car.Pattern.FILL);
         Scanner in = new Scanner(System.in);
-        System.out.println("write player name for"+ player.getPlayerType());
+        System.out.println("write player name for "+ player.getPlayerType());
         String name = in.nextLine();
+        player.setPlayername(name);
         GUI_Player guiPlayer = new GUI_Player(name, player.getMoney(), guiCar);
         gui.addPlayer(guiPlayer);
         //gui.addPlayer(guiPlayer);
         GUI_Field field = gui.getFields()[0];
         field.setCar(guiPlayer, true);
+
         return guiPlayer;
     }
 
@@ -117,7 +116,7 @@ public class Controller {
             }
         }
         for (int i = 0; i < totalPlayers; i++) {
-            int startingBalance = 0;
+            int startingBalance = 1;
             if (totalPlayers == 2) {
                 startingBalance = 20;
             } else if (totalPlayers == 3) {

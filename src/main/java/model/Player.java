@@ -21,7 +21,7 @@ public class Player {
 
     public void movePlayerPiece(int addMove) {
         playerPiece.movePiece(addMove);
-        playerPosition = playerPiece.getPieceMoves()%23;
+        playerPosition = playerPiece.getPieceMoves()%24;
     }
 
     public int getPieceMoves() {
