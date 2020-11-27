@@ -54,18 +54,16 @@ public class Game {
             for(int i = 0; i < players.length; i++) {
                 String answer = gui.getUserButtonPressed("Your turn: ", "Roll");
                 if (answer.equals("Roll")) {
-                    int maxEye = 6;
-                    int minEye = 1;
-                    int diceOutcome = (int) ((Math.random() * maxEye) + minEye);
-                    roll(diceOutcome, gui, guiPlayers[i], players[i]);
+                    roll(gui, guiPlayers[i], players[i]);
                 }
             }
         }
     }
 
-    public Dice roll(int eyes, GUI gui, GUI_Player guiPlayer, Player player) {
+    public Dice roll(GUI gui, GUI_Player guiPlayer, Player player) {
         Dice dice = new Dice();
         dice.rollDice();
+        int eyes = dice.getFaceValue();
         dice.setDiceOutcome(eyes);
         gui.setDie(eyes);
         System.out.println(player.getPosition());
