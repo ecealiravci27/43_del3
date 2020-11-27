@@ -1,23 +1,23 @@
-import Model.Board;
-import Model.Dice;
-import Model.Player;
-import com.sun.glass.ui.Size;
-import gui_codebehind.GUI_Center;
+import model.Board;
+import model.Dice;
+import model.GuiBoard;
+import model.Player;
 import gui_fields.*;
 import gui_main.GUI;
 import java.awt.Color;
 
-import gui_main.GUI;
-
-import java.awt.*;
 import java.util.Scanner;
 public class Game {
     Scanner in = new Scanner(System.in);
     public void Start() {
 
-        //loads board
+        //loads guiboard
+        GuiBoard guiBoard = new GuiBoard();
+        GUI gui = new GUI(guiBoard.setupField(), Color.white);
+
+        //logic board
         Board board = new Board();
-        GUI gui = new GUI(board.setupField(), Color.white);
+
 
         //gui dice showing 6 eyes
         Dice dice = new Dice();
@@ -63,7 +63,7 @@ public class Game {
     public Dice roll(GUI gui, GUI_Player guiPlayer, Player player) {
         Dice dice = new Dice();
         dice.rollDice();
-        int eyes = dice.getFaceValue();
+        int eyes = dice.rollDice();
         dice.setDiceOutcome(eyes);
         gui.setDie(eyes);
         System.out.println(player.getPosition());
@@ -88,7 +88,6 @@ public class Game {
         System.out.println("Select piece by entering a number (1 = Tractor, 2 = Racecar, 3 = UFO, 4 = Car");
         int type = in.nextInt();
         Player player = new Player(type);
-        player.setupAccount(playerAmount);
         System.out.println("Enter your name: ");
         Scanner scanner2 = new Scanner(System.in);
         String name = scanner2.nextLine();

@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public abstract class Field {
     protected String fieldName;

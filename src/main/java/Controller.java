@@ -1,11 +1,20 @@
+import gui_main.GUI;
 import model.*;
 
+import java.awt.*;
 import java.util.Scanner;
 public class Controller {
 
     Dice dice;
     Player player;
-    Board board;
+
+
+    //loads guiboard
+    GuiBoard guiBoard = new GuiBoard();
+    GUI gui = new GUI(guiBoard.setupField(), Color.white);
+
+    //logic board
+    Board board = new Board();
 
     Scanner in = new Scanner(System.in);
     public static void main(String[] args) {

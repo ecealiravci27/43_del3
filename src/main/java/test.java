@@ -1,22 +1,22 @@
 
-import Model.Account;
-import Model.Dice;
-import Model.Player;
-import org.junit.jupiter.api.Test;
+import model.Account;
+import model.Dice;
+import model.Player;
+import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class test {
     @Test
     void changeTotalBalanceMinus() {
-        Account account = new Account(20);
+        Account account = new Account();
         account.changeTotalBalance(-1100);
         assertEquals(0, account.getTotalBalance());
     }
 
     @Test
     void changeTotalBalancePlus() {
-        Account account = new Account(20);
+        Account account = new Account();
         account.changeTotalBalance(+1100);
         assertEquals(1120, account.getTotalBalance());
     }
@@ -32,9 +32,9 @@ public class test {
     void rollDice() {
         Dice dice = new Dice();
         dice.rollDice();
-        int eyes = dice.getFaceValue();
+        int eyes = dice.rollDice();
         dice.setDiceOutcome(2);
-        assertEquals(2, dice.getFaceValue());
+        assertEquals(2, dice.rollDice());
     }
 
     @Test

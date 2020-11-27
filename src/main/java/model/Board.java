@@ -19,7 +19,7 @@ public class Board {
    public Field[] setupField() {
       field = new Field[24];
       field[0] = new CornerField("Start",false, 2); //der skal også gives 2m hvis man også går forbi startfeltet. må finde ud af hvordan
-      field[1] = new PropertyField ("Burgerbaren","nom nom","brown",1 );
+      field[1] = new PropertyField("Burgerbaren","nom nom","brown",1 );
       field[2] = new PropertyField("pizzahuset", "wow pizza", "brown", 1);
       field[3] = new ChanceField();
       field[4] = new PropertyField("Slikbutikken", "sluk :D","light blue", 1);
