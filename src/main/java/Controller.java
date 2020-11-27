@@ -33,7 +33,6 @@ public class Controller {
         }
 
         int playerturn = 0;
-
         System.out.println(player[0].getPlayerType());
         while (!checkBancrupcy(player)) {
             playerturn = playerturn%(player.length);
@@ -42,7 +41,7 @@ public class Controller {
             System.out.println(account);
 
             ///gui rooldice
-            String answer = gui.getUserButtonPressed(player[playerturn].getPlayername()+" turn: ", "Roll");
+            String answer = gui.getUserButtonPressed(player[playerturn].getPlayername()+"\'s turn: ", "Roll");
             int eyes = dice.rollDice();
             dice.rememberDice(eyes);
             guiRoll(gui, dice);
@@ -53,12 +52,23 @@ public class Controller {
 
             doRule(board.getField(position), pile, player, property, playerturn, gui, guiPlayers[playerturn]);
             if(player[playerturn].getMoney() == 0){
+                int max = 0;
+                String name = "";
+
+                for (int i = 0; i < player.length; i++) {
+                    if(player[i].getMoney() > max) {
+                        max = player[i].getMoney();
+                        name = player[i].getPlayername();
+                    }
+                }
+                gui.showMessage("Winner is: " + name + " with total money: " + max);
                 System.out.println("game over");
                 break;
             }
 
             playerturn++;
         }
+
     }
 
     private static Player setupPlayer() {
@@ -171,13 +181,18 @@ public class Controller {
         if (rulesB[1]) {
             int owner = property.getOwner(position);
             int change = rulesI[2];
-            System.out.println("change: " + change);
-            if (owner == 0) {
-                player[active].changeMoney((change));
-                property.buy(position, player[active].getPlayerType());
+
+            if (owner == 5) {
+                System.out.println("charging: " + change);
+                player[active].changeMoney(-(change));
+                gplayer.setBalance(player[active].getMoney());
+                property.buy(position, active);
             } else {
                 player[active].changeMoney(-(change));
-                player[owner-1].changeMoney((change));
+                int own = property.getOwner(position);
+                player[own].changeMoney((change));
+                gplayer.setBalance(player[active].getMoney());
+                gplayer.setBalance(player[own].getMoney());
             }
 
             if (rulesB[2]) {
@@ -188,6 +203,7 @@ public class Controller {
                 if (!player[active].getCanEscape()) {
                     player[active].setPosition(6);
                     player[active].changeMoney(-1);
+                    gplayer.setBalance(player[active].getMoney());
                 }
             }
 
@@ -263,6 +279,8 @@ public class Controller {
                 if (i != active) {
                     player[i].changeMoney(-1);
                     player[active].changeMoney(1);
+                    gplayer.setBalance(player[active].getMoney());
+                    gplayer.setBalance(player[i].getMoney());
                 }
             }
         }
@@ -270,6 +288,7 @@ public class Controller {
         //Active player pays 2M to bank
         if (rulesI[1] != 0) {
             player[active].changeMoney(rulesI[1]);
+            gplayer.setBalance(player[active].getMoney());
         }
     }
 

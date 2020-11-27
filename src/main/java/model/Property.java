@@ -4,10 +4,13 @@ public class Property {
     int[] ownedProperties;
 
     public Property() {
-        this.ownedProperties = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        this.ownedProperties = new int[]{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5};
     }
 
     public boolean isOwned(int id) {
+        if (ownedProperties[id] == 0) {
+            return true;
+        }
         if (ownedProperties[id] == 1) {
             return true;
         }
@@ -17,10 +20,7 @@ public class Property {
         if (ownedProperties[id] == 3) {
             return true;
         }
-        if (ownedProperties[id] == 4) {
-            return true;
-        }
-        if (ownedProperties[id] == 0) {
+        if (ownedProperties[id] == 5) {
             return false;
         }
         return false;
