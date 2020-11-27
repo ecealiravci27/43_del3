@@ -13,14 +13,14 @@ public class Player {
     public Player(int type) {
         this.playerType = type;
         this.playerPiece = new Piece(type);
-        this.playerPosition = (playerPiece.getPieceMoves()%23);
+        this.playerPosition = 0;
         this.playerAccount = new Account();
         this.canEscape = false;
     }
 
-
     public void movePlayerPiece(int addMove) {
         playerPiece.movePiece(addMove);
+        playerPosition = playerPiece.getPieceMoves()%23;
     }
 
     public int getPieceMoves() {

@@ -8,7 +8,6 @@ public class Piece {
     public Piece(int playertype){
         this.totalMoves = 0;
         this.pieceType = type[playertype - 1];
-
     }
 
     public void movePiece(int addMove) {

@@ -24,11 +24,11 @@ public class Game {
         while (!checkBancrupcy(player)) {
             playerturn = playerturn%(player.length);
             System.out.println(playerturn);
-            int position = (player[playerturn].getPieceMoves())%23;
-            System.out.println(position);
-            movePlayer(player[playerturn]);
+            int position = (player[playerturn].getPlayerPosition());
+            int account = player[playerturn].getMoney();
+            System.out.println(account);
+            player[playerturn].movePlayerPiece(dice.rollDice());
             doRule(board.getField(position), pile, player, property, playerturn);
-
             if(player[playerturn].getMoney() == 0){
                 System.out.println("game over");
                 break;
@@ -99,7 +99,7 @@ public class Game {
                 property.buy(position, player[active].getPlayerType());
             } else {
                 player[active].changeMoney(-(change));
-                player[owner].changeMoney((change));
+                player[owner-1].changeMoney((change));
             }
 
             if (rulesB[2]) {
@@ -187,11 +187,6 @@ public class Game {
 
             player[active].changeMoney(-2);
         }
-    }
-
-    public static void movePlayer(Player player) {
-        Dice dice = new Dice();
-        player.changeMoney(dice.rollDice());
     }
 
     public static boolean checkBancrupcy (Player[] player) {
