@@ -80,6 +80,7 @@ public class Game {
         int position = player[active].getPlayerPosition();
         Object[] rules = field.getAllRules();
         boolean[] rulesB = field.getBooleanRules();
+        int[] rulesI = field.getIntRules();
         System.out.println("player with piece type " + player[active].getPlayerType() + " is doing rules for " + rules[0].toString());
         System.out.println("description: " + rules[1]);
 
@@ -93,7 +94,8 @@ public class Game {
         //The field is a property field, rules for a property fied commence
         if (rulesB[1]) {
             int owner = property.getOwner(position);
-            int change = (Integer) rules[14];
+            int change = rulesI[2];
+            System.out.println("change: " + change);
             if (owner == 0) {
                 player[active].changeMoney((change));
                 property.buy(position, player[active].getPlayerType());
@@ -183,9 +185,8 @@ public class Game {
         }
 
         //Active player pays 2M to bank
-        if (rulesI[0] < 0) {
-
-            player[active].changeMoney(-2);
+        if (rulesI[1] != 0) {
+            player[active].changeMoney(rulesI[1]);
         }
     }
 

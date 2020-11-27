@@ -56,7 +56,7 @@ public abstract class Field {
     public int[] getIntRules(){
         int intRule[];
 
-        return new int[]{changeMoney,fieldValue, movePiece};
+        return new int[]{changeMoney, movePiece, fieldValue};
     }
 
     public Object[] getAllRules(){
