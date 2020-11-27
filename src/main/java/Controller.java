@@ -139,21 +139,6 @@ public class Controller {
         return players;
     }
 
-    public  GUI_Player[] setupGuiPlayers(int totalPlayers, GUI gui, Player[] player){
-        GUI_Player[] guiPlayer = new GUI_Player[totalPlayers];
-        for (int j = 0; j < totalPlayers; j++) {
-            if (j == 0) {
-                System.out.println("The youngest starts");
-                guiPlayer[j] = setupGuiPlayer(player[j], gui);
-            }
-            if (j >= 1) {
-                guiPlayer[j] = setupGuiPlayer(player[j], gui);
-            }
-        }
-        return guiPlayer;
-    }
-
-
 
     //dice
     public static void guiRoll (GUI gui, Dice dice) {
